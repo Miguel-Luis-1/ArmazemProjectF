@@ -10,6 +10,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blueAccent,
+        title: const Text('Lista de produtos', 
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,        
+        ),
+        textDirection: TextDirection.ltr
+        ),
+      ),
+      body: const Column(
+        children:[
+          Text('data',),
+        ]
+      ),
+    );
   }
 }
