@@ -1,5 +1,6 @@
 import 'package:armazemf/app/pages/configuracoes_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class DrawerBase extends StatefulWidget {
   const DrawerBase({super.key});
@@ -39,11 +40,12 @@ class _DrawerBaseState extends State<DrawerBase> {
             title: const Text('Configurações'),
             leading: const Icon(Icons.settings),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const ConfiguracoesPage()),
-              ).whenComplete(() => Navigator.pop(contextDrawer));
+              Navigator.popAndPushNamed(context, '/config');
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => const ConfiguracoesPage()),
+              // ).whenComplete(() => Navigator.pop(contextDrawer));
               // Navigator.pop(context);
             },
           ),
