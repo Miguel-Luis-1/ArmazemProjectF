@@ -1,3 +1,4 @@
+import 'package:armazemf/app/pages/configuracoes_page.dart';
 import 'package:flutter/material.dart';
 
 class DrawerBase extends StatefulWidget {
@@ -9,31 +10,45 @@ class DrawerBase extends StatefulWidget {
 
 class _DrawerBaseState extends State<DrawerBase> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext contextDrawer) {
     return Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color(0xFF247BA0),
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Color(0xFF247BA0),
+            ),
+            child: Center(
+              child: Icon(
+                Icons.inventory_outlined,
+                color: Colors.white,
+                size: 100,
               ),
-              child: Text('Cabeçalho do Menu'),
             ),
-            ListTile(
-              title: const Text('Item 1'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Item 2'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      );
+          ),
+          ListTile(
+            title: const Text('Lista de Produtos'),
+            leading: const Icon(Icons.list),
+            onTap: () {
+              Navigator.pop(contextDrawer);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            title: const Text('Configurações'),
+            leading: const Icon(Icons.settings),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ConfiguracoesPage()),
+              ).whenComplete(() => Navigator.pop(contextDrawer));
+              // Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    );
   }
 }
