@@ -4,11 +4,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 class BasePage extends StatefulWidget {
   final Widget body;
   final String title;
+  final bool bntAdd;
 
   const BasePage({
     super.key,
     required this.body,
     required this.title,
+    this.bntAdd = false,
   });
 
   @override
@@ -75,6 +77,17 @@ class _BasePageState extends State<BasePage> {
         ),
       ),
       body: widget.body,
+      floatingActionButton: Visibility(
+        visible: widget.bntAdd,
+        child: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: const Color(0xFF247BA0),
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+        ),
+      ),
     );
   }
 }
