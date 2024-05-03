@@ -15,7 +15,8 @@ class AppWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Armazem Project',
       theme:  ThemeData.light(),
-      routerConfig: Modular.routerConfig,
+      routerDelegate: Modular.routerDelegate,
+      routeInformationParser: Modular.routeInformationParser,
     ); //added by extension 
   }
 }

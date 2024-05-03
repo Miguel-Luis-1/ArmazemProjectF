@@ -6,14 +6,14 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class AppModule extends Module {
   @override
-  void binds(i) {
-    // i.addSingleton((i) => HomePageStore());
-    // i.addSingleton((i) => ConfiguracoesStore());
-  }
+  final List<Bind> binds = [
+     Bind.singleton((i) => HomePageStore()),
+    Bind.singleton((i) => ConfiguracoesStore()),
+  ];
 
   @override
-  void routes(r) {
-    r.child('/', child: (context) => const HomePage());
-    r.child('/config', child: (context) => const ConfiguracoesPage());
-  }
+  final List<ModularRoute> routes = [
+    ChildRoute('/', child:  (_, args) => const HomePage()),
+    ChildRoute('/config', child:  (_, args) => const ConfiguracoesPage()),
+  ];
 }
