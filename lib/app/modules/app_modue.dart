@@ -1,5 +1,6 @@
 import 'package:armazemf/app/home/home_page.dart';
 import 'package:armazemf/app/pages/configuracoes_page.dart';
+import 'package:armazemf/app/pages/create_edit_page.dart';
 import 'package:armazemf/app/stores/configuracoes_store.dart';
 import 'package:armazemf/app/stores/home_page_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -15,5 +16,6 @@ class AppModule extends Module {
   final List<ModularRoute> routes = [
     ChildRoute('/', child:  (_, args) => const HomePage()),
     ChildRoute('/config', child:  (_, args) => const ConfiguracoesPage()),
+    ChildRoute('/create', child:  (_, args) => const CreateEditPage()),
   ];
 }

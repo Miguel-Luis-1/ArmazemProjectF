@@ -5,12 +5,14 @@ class BasePage extends StatefulWidget {
   final Widget body;
   final String title;
   final bool bntAdd;
+  final bool drawer;
 
   const BasePage({
     super.key,
     required this.body,
     required this.title,
     this.bntAdd = false,
+    this.drawer = true,
   });
 
   @override
@@ -34,7 +36,7 @@ class _BasePageState extends State<BasePage> {
             ),
             textDirection: TextDirection.ltr),
       ),
-      drawer: Drawer(
+      drawer: widget.drawer ? Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -57,7 +59,7 @@ class _BasePageState extends State<BasePage> {
                 if (Modular.to.path == '/') {
                   Navigator.pop(context);
                 } else {
-                  Navigator.popAndPushNamed(context, '/');
+                  Modular.to.pushNamed('/');
                 }
               },
             ),
@@ -69,18 +71,18 @@ class _BasePageState extends State<BasePage> {
                 if (Modular.to.path == '/config') {
                   Navigator.pop(context);
                 } else {
-                  Navigator.popAndPushNamed(context, '/config');
+                 Modular.to.pushNamed('/config');
                 }
               },
             ),
           ],
         ),
-      ),
+      ): null,
       body: widget.body,
       floatingActionButton: Visibility(
         visible: widget.bntAdd,
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: ()=> Modular.to.pushNamed('/create'),
           backgroundColor: const Color(0xFF247BA0),
           child: const Icon(
             Icons.add,
