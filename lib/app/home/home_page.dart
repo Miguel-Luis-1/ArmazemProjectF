@@ -16,7 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   final HomePageStore store = Modular.get<HomePageStore>();
 
   @override
@@ -47,37 +46,40 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _showBackDialog() {
-    Asuka.showDialog(
-      builder: (BuildContext context) {
-        return DialogBase(
-          title: 'Você deseja sair do aplicativo?',
-          content: Container(),
-          actions: <Widget>[
-            TextButton(
-              child: const Text(
-                'cancelar',
-                style: TextStyle(
-                  color: Colors.black,
+    if (!store.diaogIsOpen) {
+      store.setDialogState();
+      Asuka.showDialog(
+        builder: (BuildContext context) {
+          return DialogBase(
+            title: 'Você deseja sair do aplicativo?',
+            content: Container(),
+            actions: <Widget>[
+              TextButton(
+                child: const Text(
+                  'cancelar',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
                 ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            TextButton(
-              child: const Text(
-                'Sair',
-                style: TextStyle(
-                  color: Colors.black,
+              TextButton(
+                child: const Text(
+                  'Sair',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
                 ),
+                onPressed: () {
+                  SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+                },
               ),
-              onPressed: () {
-                SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-              },
-            ),
-          ],
-        );
-      },
-    );
+            ],
+          );
+        },
+      ).whenComplete(() => store.setDialogState());
+    }
   }
 }

@@ -1,10 +1,10 @@
 import 'package:mobx/mobx.dart';
 
-part 'home_page_store.g.dart';
+part 'back_dialog_store.g.dart';
 
-class HomePageStore = HomePageStoreBase with _$HomePageStore;
+class BackDialogStore = BackDialogStoreBase with _$BackDialogStore;
 
-abstract class HomePageStoreBase with Store {
+abstract class BackDialogStoreBase with Store {
 
   @observable
   ObservableList itens = ObservableList(); 

@@ -64,6 +64,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
+                  Modular.to.pushNamed('/login');
                 },
                 style: const ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(Colors.blue)),
@@ -78,6 +79,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
+                  Modular.to.pushNamed('/createuser');
                 },
                 style: const ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(Colors.blue)),
