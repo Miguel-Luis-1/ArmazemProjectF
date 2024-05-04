@@ -1,5 +1,7 @@
 import 'package:armazemf/app/stores/home_page_store.dart';
 import 'package:armazemf/app/widgets/base_page.dart';
+import 'package:armazemf/app/widgets/dialog_base.dart';
+import 'package:asuka/asuka.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,12 +16,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   final HomePageStore store = Modular.get<HomePageStore>();
+
   @override
   void initState() {
     super.initState();
     store.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
@@ -42,11 +47,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _showBackDialog() {
-    showDialog<void>(
-      context: context,
+    Asuka.showDialog(
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Você deseja sair do aplicativo?'),
+        return DialogBase(
+          title: 'Você deseja sair do aplicativo?',
+          content: Container(),
           actions: <Widget>[
             TextButton(
               child: const Text(

@@ -4,7 +4,7 @@ class Item {
   String nome;
   String categoria;
   String descricao;
-  double preco; // Altere 'Double' para 'double'
+  double preco;
   int qtdunitaria;
 
   Item({

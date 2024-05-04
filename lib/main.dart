@@ -1,4 +1,5 @@
 import 'package:armazemf/app/modules/app_modue.dart';
+import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -17,6 +18,7 @@ class AppWidget extends StatelessWidget {
       theme:  ThemeData.light(),
       routerDelegate: Modular.routerDelegate,
       routeInformationParser: Modular.routeInformationParser,
+      builder: Asuka.builder,
     ); //added by extension 
   }
 }

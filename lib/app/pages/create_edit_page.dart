@@ -1,6 +1,6 @@
-import 'dart:developer';
-
 import 'package:armazemf/app/widgets/base_page.dart';
+import 'package:armazemf/app/widgets/dialog_base.dart';
+import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -32,11 +32,10 @@ class _CreateEditPageState extends State<CreateEditPage> {
   }
 
   void _showBackDialog() {
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Você deseja sair?'),
+    Asuka.showDialog<void>(
+      builder: (BuildContext dialogcontext) {
+        return DialogBase(
+          title: 'Você deseja sair?',
           content: const Text(
             'Você ira perder tudo que fez!',
           ),
@@ -49,7 +48,7 @@ class _CreateEditPageState extends State<CreateEditPage> {
                 ),
               ),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(dialogcontext);
               },
             ),
             TextButton(
@@ -61,7 +60,7 @@ class _CreateEditPageState extends State<CreateEditPage> {
               ),
               onPressed: () {
                 Navigator.pop(context);
-                Navigator.pop(context);
+                Navigator.pop(dialogcontext);
               },
             ),
           ],
