@@ -15,7 +15,7 @@ class DialogBase extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(25.0),
-      child: AlertDialog(
+      child: AlertDialog(  
         contentPadding: const EdgeInsets.all(18),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(25))),

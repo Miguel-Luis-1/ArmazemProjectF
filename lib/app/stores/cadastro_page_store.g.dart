@@ -74,19 +74,32 @@ mixin _$CadastroPageStore on CadastroPageStoreBase, Store {
     });
   }
 
-  late final _$CadastroPageStoreBaseActionController =
-      ActionController(name: 'CadastroPageStoreBase', context: context);
+  late final _$isGerenteAtom =
+      Atom(name: 'CadastroPageStoreBase.isGerente', context: context);
 
   @override
-  dynamic cadastro() {
-    final _$actionInfo = _$CadastroPageStoreBaseActionController.startAction(
-        name: 'CadastroPageStoreBase.cadastro');
-    try {
-      return super.cadastro();
-    } finally {
-      _$CadastroPageStoreBaseActionController.endAction(_$actionInfo);
-    }
+  TextEditingController get isGerente {
+    _$isGerenteAtom.reportRead();
+    return super.isGerente;
   }
+
+  @override
+  set isGerente(TextEditingController value) {
+    _$isGerenteAtom.reportWrite(value, super.isGerente, () {
+      super.isGerente = value;
+    });
+  }
+
+  late final _$cadastroAsyncAction =
+      AsyncAction('CadastroPageStoreBase.cadastro', context: context);
+
+  @override
+  Future cadastro(dynamic context) {
+    return _$cadastroAsyncAction.run(() => super.cadastro(context));
+  }
+
+  late final _$CadastroPageStoreBaseActionController =
+      ActionController(name: 'CadastroPageStoreBase', context: context);
 
   @override
   dynamic dispose() {
@@ -105,7 +118,8 @@ mixin _$CadastroPageStore on CadastroPageStoreBase, Store {
 nomeController: ${nomeController},
 emailController: ${emailController},
 senhaController: ${senhaController},
-codigoEmpresaController: ${codigoEmpresaController}
+codigoEmpresaController: ${codigoEmpresaController},
+isGerente: ${isGerente}
     ''';
   }
 }

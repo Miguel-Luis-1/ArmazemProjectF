@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:armazemf/app/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
@@ -14,19 +15,20 @@ abstract class LoginPageStoreBase with Store {
   @observable
   TextEditingController senhaController = TextEditingController();
 
-
   @action
-  login(){
+  login() async {
+
     Map<String, dynamic> data = {
       'email': emailController.text,
       'password': senhaController.text,
     };
+    UserService().login(data);
     dynamic user = jsonEncode(data);
     log(user.toString(), name: 'User');
   }
 
   @action
-  dispose(){
+  dispose() {
     emailController.clear();
     senhaController.clear();
   }

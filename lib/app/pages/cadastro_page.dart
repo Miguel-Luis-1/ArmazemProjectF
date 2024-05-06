@@ -69,6 +69,12 @@ class _CadastroPageState extends State<CadastroPage> {
                     textController: store.codigoEmpresaController,
                     isNuber: true,
                   ),
+                  InputBase(
+                    title: 'Funcionario gerente',
+                    alert: 'insira o dado',
+                    textController: store.isGerente,
+                    isNuber: true,
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
@@ -76,11 +82,12 @@ class _CadastroPageState extends State<CadastroPage> {
                       width: double.infinity,
                       child: TextButton(
                         style: const ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                          backgroundColor:
+                              MaterialStatePropertyAll(Colors.blue),
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            store.cadastro();
+                            store.cadastro(context);
                           }
                         },
                         child: const Text(
