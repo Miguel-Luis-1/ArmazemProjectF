@@ -40,6 +40,17 @@ mixin _$ConfiguracoesStore on ConfiguracoesStoreBase, Store {
   }
 
   @override
+  dynamic getUser() {
+    final _$actionInfo = _$ConfiguracoesStoreBaseActionController.startAction(
+        name: 'ConfiguracoesStoreBase.getUser');
+    try {
+      return super.getUser();
+    } finally {
+      _$ConfiguracoesStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic dispose() {
     final _$actionInfo = _$ConfiguracoesStoreBaseActionController.startAction(
         name: 'ConfiguracoesStoreBase.dispose');

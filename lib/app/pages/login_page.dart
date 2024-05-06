@@ -28,56 +28,56 @@ class _LoginPageState extends State<LoginPage> {
       return BasePage(
         drawer: false,
         title: 'Fazer login',
-        body:SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 15,
+        body: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 15,
+                ),
+                const Center(
+                  child: Text(
+                    'Faça o Login',
+                    style: TextStyle(fontSize: 30),
                   ),
-                  const Center(
-                    child: Text(
-                      'Faça o Login',
-                      style: TextStyle(fontSize: 30),
-                    ),
-                  ),
-                  InputBase(
-                    title: 'Email',
-                    alert: 'Por favor, insira seu email',
-                    textController: store.emailController,
-                  ),
-                  InputBase(
-                    title: 'Senha',
-                    alert: 'Por favor, insira sua senha',
-                    textController: store.senhaController,
-                    isPassword: true,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                      width: double.infinity,
-                      child: TextButton(
-                        style: const ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(Colors.blue),
-                        ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            store.login();
-                          }
-                        },
-                        child: const Text(
-                          'Entrar',
-                          style: TextStyle(color: Colors.white),
-                        ),
+                ),
+                InputBase(
+                  title: 'Email',
+                  alert: 'Por favor, insira seu email',
+                  textController: store.emailController,
+                ),
+                InputBase(
+                  title: 'Senha',
+                  alert: 'Por favor, insira sua senha',
+                  textController: store.senhaController,
+                  isPassword: true,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                    width: double.infinity,
+                    child: TextButton(
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                      ),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          store.login(context);
+                        }
+                      },
+                      child: const Text(
+                        'Entrar',
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
+        ),
       );
     });
   }

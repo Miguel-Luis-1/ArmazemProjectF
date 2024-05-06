@@ -1,12 +1,24 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService {
-  final dio = Dio();
+  Dio dio = Dio();
+  UserService() {
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest:
+          (RequestOptions options, RequestInterceptorHandler handler) async {
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        String? token = sharedPreferences.getString('token');
+        options.headers.addAll({
+          'Authorization': 'Bearer $token',
+        });
+        handler.next(options); 
+      },
+    ));
+  }
 
   cadastro(Map credenciais) async {
-    // Rodar a API assim
-    // php artisan serve --host=0.0.0.0 --port=8000
-    // Colocar o ip de minha maquina
     return dio.post(
       'http://192.168.15.158:8000/api/createuser',
       data: credenciais,
@@ -14,10 +26,13 @@ class UserService {
   }
 
   login(Map credenciais) async {
-    
     return dio.post(
-      'http://192.168.15.158:8000/api/createuser',
+      'http://192.168.15.158:8000/api/login',
       data: credenciais,
     );
+  }
+
+  Future getUserByToken() async {
+    return dio.get('http://192.168.15.158:8000/api/tokenuser');
   }
 }

@@ -20,6 +20,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
   void initState() {
     store.dispose();
     // store.getUserTeste();
+    store.getUser();
     super.initState();
   }
 
@@ -58,7 +59,12 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
       builder: (context) => DialogBase(
         title: 'Qual a ação desejada?',
         content: Padding(
-          padding: const EdgeInsets.fromLTRB(50,0,0,0,),
+          padding: const EdgeInsets.fromLTRB(
+            50,
+            0,
+            0,
+            0,
+          ),
           child: Row(
             children: [
               TextButton(

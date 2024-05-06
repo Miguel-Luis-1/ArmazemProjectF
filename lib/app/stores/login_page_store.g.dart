@@ -41,19 +41,16 @@ mixin _$LoginPageStore on LoginPageStoreBase, Store {
     });
   }
 
-  late final _$LoginPageStoreBaseActionController =
-      ActionController(name: 'LoginPageStoreBase', context: context);
+  late final _$loginAsyncAction =
+      AsyncAction('LoginPageStoreBase.login', context: context);
 
   @override
-  dynamic login() {
-    final _$actionInfo = _$LoginPageStoreBaseActionController.startAction(
-        name: 'LoginPageStoreBase.login');
-    try {
-      return super.login();
-    } finally {
-      _$LoginPageStoreBaseActionController.endAction(_$actionInfo);
-    }
+  Future login(BuildContext context) {
+    return _$loginAsyncAction.run(() => super.login(context));
   }
+
+  late final _$LoginPageStoreBaseActionController =
+      ActionController(name: 'LoginPageStoreBase', context: context);
 
   @override
   dynamic dispose() {
