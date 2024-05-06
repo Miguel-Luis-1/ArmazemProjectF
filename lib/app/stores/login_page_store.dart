@@ -27,8 +27,12 @@ abstract class LoginPageStoreBase with Store {
       };
       UserService().login(data).then((value) async {
         log(value.toString());
-        await sharedPreferences.setString('token', value.toString());
+        // Armazenar todos os dados do usuário no SharedPreferences
+        await sharedPreferences.setString('token', value['token'].toString());
+        await sharedPreferences.setString('user', jsonEncode(value['user']));
         Navigator.pop(context);
+        log(sharedPreferences.getString('token').toString());
+        log(sharedPreferences.getString('user').toString());
       });
     } catch (e) {
       log('Ocorreu um erro: $e');

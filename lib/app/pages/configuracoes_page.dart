@@ -20,7 +20,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
   void initState() {
     store.dispose();
     // store.getUserTeste();
-    store.getUser();
+    //store.getUser();
     super.initState();
   }
 
