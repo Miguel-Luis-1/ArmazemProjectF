@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
@@ -15,6 +18,18 @@ abstract class CadastroPageStoreBase with Store {
   @observable
   TextEditingController codigoEmpresaController = TextEditingController();
 
+
+  @action
+  cadastro(){
+    Map<String, dynamic> data = {
+      'name' : nomeController.text,
+      'email': emailController.text,
+      'password': senhaController.text,
+      'empresa_id': codigoEmpresaController.text,
+    };
+    dynamic user = jsonEncode(data);
+    log(user.toString(), name: 'User');
+  }
 
   @action
   dispose(){

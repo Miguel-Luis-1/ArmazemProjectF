@@ -2,10 +2,7 @@ import 'package:armazemf/app/stores/cadastro_page_store.dart';
 import 'package:armazemf/app/widgets/back_dialog.dart';
 import 'package:armazemf/app/widgets/base_page.dart';
 import 'package:armazemf/app/widgets/input_base.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -58,12 +55,13 @@ class _CadastroPageState extends State<CadastroPage> {
                   InputBase(
                     title: 'Email',
                     alert: 'Por favor, insira seu email',
-                    textController: store.senhaController,
+                    textController: store.emailController,
                   ),
                   InputBase(
                     title: 'Senha',
                     alert: 'Por favor, insira sua senha',
                     textController: store.senhaController,
+                    isPassword: true,
                   ),
                   InputBase(
                     title: 'Código da Empresa',
@@ -82,7 +80,7 @@ class _CadastroPageState extends State<CadastroPage> {
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            // Process data.
+                            store.cadastro();
                           }
                         },
                         child: const Text(

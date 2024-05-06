@@ -6,12 +6,14 @@ class InputBase extends StatelessWidget {
   final String alert;
   final TextEditingController textController;
   final bool isNuber;
+  final bool isPassword;
 
   const InputBase({
     required this.title,
     required this.alert,
     required this.textController,
     this.isNuber = false,
+    this.isPassword = false,
   });
 
   @override
@@ -40,6 +42,7 @@ class InputBase extends StatelessWidget {
         ),
         child: TextFormField(
           controller: textController,
+          obscureText: isPassword,
           decoration: InputDecoration(
             labelText: title,
             border: InputBorder.none,
