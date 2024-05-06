@@ -1,6 +1,8 @@
 import 'package:armazemf/app/stores/cadastro_page_store.dart';
 import 'package:armazemf/app/widgets/back_dialog.dart';
 import 'package:armazemf/app/widgets/base_page.dart';
+import 'package:armazemf/app/widgets/input_base.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -48,57 +50,47 @@ class _CadastroPageState extends State<CadastroPage> {
                       style: TextStyle(fontSize: 30),
                     ),
                   ),
-                  TextFormField(
-                    controller: store.nomeController,
-                    decoration: const InputDecoration(labelText: 'Nome'),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Por favor, insira seu nome';
-                      }
-                      return null;
-                    },
+                  InputBase(
+                    title: 'Nome',
+                    alert: 'Por favor, insira seu nome',
+                    textController: store.nomeController,
                   ),
-                  TextFormField(
-                    controller: store.emailController,
-                    decoration: const InputDecoration(labelText: 'Email'),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Por favor, insira seu email';
-                      }
-                      return null;
-                    },
+                  InputBase(
+                    title: 'Email',
+                    alert: 'Por favor, insira seu email',
+                    textController: store.senhaController,
                   ),
-                  TextFormField(
-                    controller: store.senhaController,
-                    decoration: const InputDecoration(labelText: 'Senha'),
-                    obscureText: true,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Por favor, insira sua senha';
-                      }
-                      return null;
-                    },
+                  InputBase(
+                    title: 'Senha',
+                    alert: 'Por favor, insira sua senha',
+                    textController: store.senhaController,
                   ),
-                  TextFormField(
-                    controller: store.codigoEmpresaController,
-                    decoration: const InputDecoration(labelText: 'Código da Empresa'),
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    validator: (value) {
-                       if (value!.isEmpty) {
-                        return 'Por favor, insira o codigo';
-                      }
-                    }, // Only numbers can be entered
+                  InputBase(
+                    title: 'Código da Empresa',
+                    alert: 'Por favor, insira o codigo',
+                    textController: store.codigoEmpresaController,
+                    isNuber: true,
                   ),
-                  TextButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        // Process data.
-                      }
-                    },
-                    child: const Text('Cadastrar'),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      width: double.infinity,
+                      child: TextButton(
+                        style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            // Process data.
+                          }
+                        },
+                        child: const Text(
+                          'Cadastrar',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -109,4 +101,3 @@ class _CadastroPageState extends State<CadastroPage> {
     });
   }
 }
-
