@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:armazemf/app/models/user.dart';
 import 'package:armazemf/app/service/user_service.dart';
 import 'package:mobx/mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'configuracoes_store.g.dart';
 
@@ -23,16 +24,12 @@ abstract class ConfiguracoesStoreBase with Store {
   }
 
   @action
-  getUser() {
-    UserService().getUserByToken().then(
-      (value) {
-        log(value.toString());
-        Map<String, dynamic> data = jsonDecode(value);
-        user = User.fromJson(data);
-      },
-    ).catchError((e) {
-      log('Erro: ${e}');
-    });
+  getUser() async {
+    SharedPreferences sharedPreferences;
+    sharedPreferences = await SharedPreferences.getInstance();
+    dynamic dados = sharedPreferences.getString('user').toString();
+    Map<String, dynamic> jsoDados = jsonEncode(dados) as Map<String, dynamic>;
+    user = User.fromJson(jsoDados);
   }
 
   @action
