@@ -1,3 +1,4 @@
+import 'package:armazemf/app/models/item.dart';
 import 'package:armazemf/app/stores/home_page_store.dart';
 import 'package:armazemf/app/widgets/base_page.dart';
 import 'package:armazemf/app/widgets/dialog_base.dart';
@@ -5,6 +6,7 @@ import 'package:asuka/asuka.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -20,6 +22,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    store.getItens(context);
     super.initState();
     store.dispose();
   }
@@ -39,6 +42,19 @@ class _HomePageState extends State<HomePage> {
                   height: 15,
                 ),
                 Center(child: Text('${store.itens.length} itens cadastrados')),
+                const SizedBox(height: 15),
+                Visibility(
+                  visible: store.itens.length != 0,
+                  child: ListView.builder(
+                     scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: store.itens.length,
+                    itemBuilder: (context, index) {
+                      var iten = store.itens[index];
+                      return Text('${iten['nome']}');
+                    },
+                  ),
+                ),
               ],
             )),
       );

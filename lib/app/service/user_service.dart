@@ -47,11 +47,14 @@ class UserService {
     } on DioException catch (e) {
       if (e.response != null) {
         log('1Erro: ${e.response!.data}');
-        if (e.response!.data['data']['Status'].toString() == 'Senha incoreta!') {
-          final snackBar = SnackBar(content: Text('${e.response!.data['data']['Status']}'));
+        if (e.response!.data['data']['Status'].toString() ==
+            'Senha incoreta!') {
+          final snackBar =
+              SnackBar(content: Text('${e.response!.data['data']['Status']}'));
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        } else if (e.response!.data['data']['Status'].toString() == 'Usuario não encontrado!') {
-                    final snackBar =
+        } else if (e.response!.data['data']['Status'].toString() ==
+            'Usuario não encontrado!') {
+          final snackBar =
               SnackBar(content: Text('${e.response!.data['data']['Status']}'));
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         } else {
@@ -73,14 +76,24 @@ class UserService {
   }
 
   Future logout() async {
-    return dio
-        .post('http://192.168.15.158:8000/api/logout')
-        .then((value) async {
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-      sharedPreferences.remove('user');
-      log(value.toString());
-      Modular.to.pushNamed('/');
-    });
+    try {
+      return await dio
+          .post('http://192.168.15.158:8000/api/logout')
+          .then((value) async {
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        sharedPreferences.remove('user');
+        log(value.toString());
+        Modular.to.pushNamed('/');
+      });
+    } on DioException catch (e) {
+      if (e.response != null) {
+        log('1Erro: ${e.response!.data}');
+      } else {
+        log('2Erro: ${e.message}');
+      }
+    } catch (e) {
+      log('Erro: ${e}');
+    }
   }
 }
