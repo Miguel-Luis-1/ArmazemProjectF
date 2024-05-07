@@ -69,11 +69,36 @@ class _CadastroPageState extends State<CadastroPage> {
                     textController: store.codigoEmpresaController,
                     isNuber: true,
                   ),
-                  InputBase(
-                    title: 'Funcionario gerente',
-                    alert: 'insira o dado',
-                    textController: store.isGerente,
-                    isNuber: true,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                            color: Colors.grey), // Adiciona cor à borda
+                      ),
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width > 600
+                            ? MediaQuery.of(context).size.width * 0.9
+                            : MediaQuery.of(context).size.width,
+                      ),
+                      child: Row(
+                        mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween, // Adicionado aqui
+                        children: [
+                          const Text('Perfil de gerente ?'),
+                          Switch(
+                            activeColor: const Color(0xFF247BA0),
+                            value: store.isGerente,
+                            onChanged: (value) {
+                              store.isGerente = value;
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

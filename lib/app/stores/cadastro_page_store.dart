@@ -21,7 +21,7 @@ abstract class CadastroPageStoreBase with Store {
   @observable
   TextEditingController codigoEmpresaController = TextEditingController();
   @observable
-  TextEditingController isGerente = TextEditingController();
+  bool isGerente = false;
 
   @action
   cadastro(context) async {
@@ -30,7 +30,7 @@ abstract class CadastroPageStoreBase with Store {
       'email': emailController.text,
       'password': senhaController.text,
       'empresa_id': codigoEmpresaController.text,
-      'is_gerente': isGerente.text,
+      'is_gerente': isGerente,
     };
     UserService().cadastro(data).whenComplete(() {
       Asuka.showDialog(

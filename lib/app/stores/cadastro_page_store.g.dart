@@ -78,13 +78,13 @@ mixin _$CadastroPageStore on CadastroPageStoreBase, Store {
       Atom(name: 'CadastroPageStoreBase.isGerente', context: context);
 
   @override
-  TextEditingController get isGerente {
+  bool get isGerente {
     _$isGerenteAtom.reportRead();
     return super.isGerente;
   }
 
   @override
-  set isGerente(TextEditingController value) {
+  set isGerente(bool value) {
     _$isGerenteAtom.reportWrite(value, super.isGerente, () {
       super.isGerente = value;
     });

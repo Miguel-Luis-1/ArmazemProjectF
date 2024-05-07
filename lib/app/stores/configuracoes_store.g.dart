@@ -25,6 +25,14 @@ mixin _$ConfiguracoesStore on ConfiguracoesStoreBase, Store {
     });
   }
 
+  late final _$getUserAsyncAction =
+      AsyncAction('ConfiguracoesStoreBase.getUser', context: context);
+
+  @override
+  Future getUser() {
+    return _$getUserAsyncAction.run(() => super.getUser());
+  }
+
   late final _$ConfiguracoesStoreBaseActionController =
       ActionController(name: 'ConfiguracoesStoreBase', context: context);
 
@@ -34,17 +42,6 @@ mixin _$ConfiguracoesStore on ConfiguracoesStoreBase, Store {
         name: 'ConfiguracoesStoreBase.getUserTeste');
     try {
       return super.getUserTeste();
-    } finally {
-      _$ConfiguracoesStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic getUser() {
-    final _$actionInfo = _$ConfiguracoesStoreBaseActionController.startAction(
-        name: 'ConfiguracoesStoreBase.getUser');
-    try {
-      return super.getUser();
     } finally {
       _$ConfiguracoesStoreBaseActionController.endAction(_$actionInfo);
     }
