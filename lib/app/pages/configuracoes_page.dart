@@ -20,7 +20,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
   void initState() {
     store.dispose();
     // store.getUserTeste();
-    //store.getUser();
+    store.getUser();
     super.initState();
   }
 
@@ -47,6 +47,67 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                       title: Text('Nome: ${store.user!.nome}'),
                       subtitle: Text('Email: ${store.user!.email}'),
                     ),
+            ),
+            const Divider(),
+            Visibility(
+              visible: store.user != null,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      width: double.infinity,
+                      child: TextButton(
+                        style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(Colors.red),
+                        ),
+                        onPressed: () {
+                          Asuka.showDialog<void>(
+                            builder: (BuildContext dialogcontext) {
+                              return DialogBase(
+                                title: 'Você deseja sair?',
+                                content: const Text(
+                                  'Você ira sair da sua conta!',
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text(
+                                      'cancelar',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(dialogcontext);
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: const Text(
+                                      'Sair',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      store.logout();
+                                      Navigator.pop(dialogcontext);
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        child: const Text(
+                          'Sair',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

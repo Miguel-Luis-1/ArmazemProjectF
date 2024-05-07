@@ -18,63 +18,65 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    store.dispose();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
-      return BasePage(
-        drawer: false,
-        title: 'Fazer login',
-        body: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 15,
-                ),
-                const Center(
-                  child: Text(
-                    'Faça o Login',
-                    style: TextStyle(fontSize: 30),
+      return PopScope(
+        onPopInvoked: (didPop) => store.dispose(),
+        child: BasePage(
+          drawer: false,
+          title: 'Fazer login',
+          body: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 15,
                   ),
-                ),
-                InputBase(
-                  title: 'Email',
-                  alert: 'Por favor, insira seu email',
-                  textController: store.emailController,
-                ),
-                InputBase(
-                  title: 'Senha',
-                  alert: 'Por favor, insira sua senha',
-                  textController: store.senhaController,
-                  isPassword: true,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    width: double.infinity,
-                    child: TextButton(
-                      style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          store.login(context);
-                        }
-                      },
-                      child: const Text(
-                        'Entrar',
-                        style: TextStyle(color: Colors.white),
+                  const Center(
+                    child: Text(
+                      'Faça o Login',
+                      style: TextStyle(fontSize: 30),
+                    ),
+                  ),
+                  InputBase(
+                    title: 'Email',
+                    alert: 'Por favor, insira seu email',
+                    textController: store.emailController,
+                  ),
+                  InputBase(
+                    title: 'Senha',
+                    alert: 'Por favor, insira sua senha',
+                    textController: store.senhaController,
+                    isPassword: true,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      width: double.infinity,
+                      child: TextButton(
+                        style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            store.login(context);
+                          }
+                        },
+                        child: const Text(
+                          'Entrar',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

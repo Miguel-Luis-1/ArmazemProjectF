@@ -27,9 +27,23 @@ abstract class ConfiguracoesStoreBase with Store {
   getUser() async {
     SharedPreferences sharedPreferences;
     sharedPreferences = await SharedPreferences.getInstance();
-    dynamic dados = sharedPreferences.getString('user').toString();
-    Map<String, dynamic> jsoDados = jsonEncode(dados) as Map<String, dynamic>;
-    user = User.fromJson(jsoDados);
+    String? dados = sharedPreferences.getString('user');
+    if (dados == null) {
+      log('Deslogado');
+    } else {
+      log(dados);
+      Map<String, dynamic> userMap = jsonDecode(dados);
+      user = User(
+        id: userMap['id'],
+        nome: userMap['name'],
+        email: userMap['email'],
+      );
+    }
+  }
+
+  @action
+  logout() async {
+    await UserService().logout();
   }
 
   @action
