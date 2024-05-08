@@ -44,14 +44,23 @@ class _HomePageState extends State<HomePage> {
                 Center(child: Text('${store.itens.length} itens cadastrados')),
                 const SizedBox(height: 15),
                 Visibility(
-                  visible: store.itens.length != 0,
+                  visible: store.itens.isNotEmpty,
                   child: ListView.builder(
-                     scrollDirection: Axis.vertical,
+                    scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemCount: store.itens.length,
                     itemBuilder: (context, index) {
                       var iten = store.itens[index];
-                      return Text('${iten['nome']}');
+                      return Card(
+                        color: Colors.white,
+                        child: ListTile(
+                          title: Text(iten['nome']),
+                          subtitle: Text('Descrição: ${iten['descricao']}'),
+                          trailing: Text(
+                              'Unidades: ${iten['qtdunitaria'].toString()}'),
+                          onTap: () {},
+                        ),
+                      );
                     },
                   ),
                 ),

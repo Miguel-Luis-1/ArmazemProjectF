@@ -8,10 +8,10 @@ class Item {
   String descricao;
   double preco;
   int qtdunitaria;
-  String? created_at;
-  String? updated_at;
-  String? user_id;
-  String? empresa_id;
+  String? createdAt;
+  String? updatedAt;
+  String? userId;
+  String? empresaId;
 
   Item({
     this.id,
@@ -21,10 +21,10 @@ class Item {
     required this.descricao,
     required this.preco,
     required this.qtdunitaria,
-    this.created_at,
-    this.updated_at,
-    this.user_id,
-    this.empresa_id,
+    this.createdAt,
+    this.updatedAt,
+    this.userId,
+    this.empresaId,
   });
 
   factory Item.fromJson(Map<String, dynamic> json) {
@@ -36,10 +36,10 @@ class Item {
       categoria: json['categoria'],
       preco: json['preco'],
       qtdunitaria: json['qtdunitaria'],
-      created_at: json['created_at'],
-      updated_at: json['updated_at'],
-      user_id: json['user_id'],
-      empresa_id: json['empresa_id'],
+      createdAt: json['created_at'],
+      updatedAt: json['updated_at'],
+      userId: json['user_id'],
+      empresaId: json['empresa_id'],
     );
   }
 
@@ -52,10 +52,10 @@ class Item {
       'descricao': descricao,
       'preco': preco,
       'qtdunitaria': qtdunitaria,
-      'created_at': created_at,
-      'updated_at': updated_at,
-      'user_id': user_id,
-      'empresa_id': empresa_id,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
+      'user_id': userId,
+      'empresa_id': empresaId,
     };
   }
 }
