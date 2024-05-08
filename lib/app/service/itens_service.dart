@@ -1,12 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:armazemf/app/widgets/dialog_base.dart';
 import 'package:armazemf/app/widgets/un_connect_dilog.dart';
-import 'package:asuka/asuka.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ItensService {
@@ -73,5 +70,26 @@ class ItensService {
     } catch (e) {
       log('Erro: ${e}');
     }
+  }
+  Future getItenById(String id) async {
+    try {
+      Response response;
+      response = await dio.get(
+          'http://192.168.15.158:8000/api/showoneiten/${id}');
+      log(response.toString());
+      return response;
+    } on DioException catch (e) {
+      if (e.response != null) {
+        log('1Erro: ${e.response!.data}');
+      } else {
+        log('2Erro: ${e.message}');
+      }
+    } catch (e) {
+      log('Erro: ${e}');
+    }
+  }
+
+  Future creteIten() async{
+    
   }
 }

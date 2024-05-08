@@ -41,6 +41,22 @@ mixin _$HomePageStore on HomePageStoreBase, Store {
     });
   }
 
+  late final _$itemAtom =
+      Atom(name: 'HomePageStoreBase.item', context: context);
+
+  @override
+  Item? get item {
+    _$itemAtom.reportRead();
+    return super.item;
+  }
+
+  @override
+  set item(Item? value) {
+    _$itemAtom.reportWrite(value, super.item, () {
+      super.item = value;
+    });
+  }
+
   late final _$HomePageStoreBaseActionController =
       ActionController(name: 'HomePageStoreBase', context: context);
 
@@ -50,6 +66,17 @@ mixin _$HomePageStore on HomePageStoreBase, Store {
         name: 'HomePageStoreBase.setDialogState');
     try {
       return super.setDialogState();
+    } finally {
+      _$HomePageStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic getItens(BuildContext context) {
+    final _$actionInfo = _$HomePageStoreBaseActionController.startAction(
+        name: 'HomePageStoreBase.getItens');
+    try {
+      return super.getItens(context);
     } finally {
       _$HomePageStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -70,7 +97,8 @@ mixin _$HomePageStore on HomePageStoreBase, Store {
   String toString() {
     return '''
 itens: ${itens},
-diaogIsOpen: ${diaogIsOpen}
+diaogIsOpen: ${diaogIsOpen},
+item: ${item}
     ''';
   }
 }

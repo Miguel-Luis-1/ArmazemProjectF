@@ -25,8 +25,51 @@ mixin _$CreateEditPageStore on CreateEditPageStoreBase, Store {
     });
   }
 
+  late final _$itemAtom =
+      Atom(name: 'CreateEditPageStoreBase.item', context: context);
+
+  @override
+  Item? get item {
+    _$itemAtom.reportRead();
+    return super.item;
+  }
+
+  @override
+  set item(Item? value) {
+    _$itemAtom.reportWrite(value, super.item, () {
+      super.item = value;
+    });
+  }
+
+  late final _$titlePageAtom =
+      Atom(name: 'CreateEditPageStoreBase.titlePage', context: context);
+
+  @override
+  String? get titlePage {
+    _$titlePageAtom.reportRead();
+    return super.titlePage;
+  }
+
+  @override
+  set titlePage(String? value) {
+    _$titlePageAtom.reportWrite(value, super.titlePage, () {
+      super.titlePage = value;
+    });
+  }
+
   late final _$CreateEditPageStoreBaseActionController =
       ActionController(name: 'CreateEditPageStoreBase', context: context);
+
+  @override
+  dynamic getIten(String? id) {
+    final _$actionInfo = _$CreateEditPageStoreBaseActionController.startAction(
+        name: 'CreateEditPageStoreBase.getIten');
+    try {
+      return super.getIten(id);
+    } finally {
+      _$CreateEditPageStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic dispose() {
@@ -42,7 +85,9 @@ mixin _$CreateEditPageStore on CreateEditPageStoreBase, Store {
   @override
   String toString() {
     return '''
-itens: ${itens}
+itens: ${itens},
+item: ${item},
+titlePage: ${titlePage}
     ''';
   }
 }

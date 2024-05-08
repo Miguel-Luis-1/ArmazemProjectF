@@ -6,7 +6,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class CreateEditPage extends StatefulWidget {
-  const CreateEditPage({super.key});
+  const CreateEditPage(void log, {super.key, this.id});
+  final String? id;
 
   @override
   State<CreateEditPage> createState() => _CreateEditPageState();
@@ -17,7 +18,7 @@ class _CreateEditPageState extends State<CreateEditPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    store.getIten(widget.id);
     super.initState();
   }
 
@@ -27,8 +28,8 @@ class _CreateEditPageState extends State<CreateEditPage> {
       return PopScope(
         canPop: false,
         onPopInvoked: (didPop) => backDialog(context),
-        child: const BasePage(
-          title: 'Criar Produto',
+        child: BasePage(
+          title: store.titlePage!,
           drawer: false,
           body: Column(
             children: [

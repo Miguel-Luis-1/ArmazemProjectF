@@ -33,6 +33,14 @@ mixin _$ConfiguracoesStore on ConfiguracoesStoreBase, Store {
     return _$getUserAsyncAction.run(() => super.getUser());
   }
 
+  late final _$logoutAsyncAction =
+      AsyncAction('ConfiguracoesStoreBase.logout', context: context);
+
+  @override
+  Future logout() {
+    return _$logoutAsyncAction.run(() => super.logout());
+  }
+
   late final _$ConfiguracoesStoreBaseActionController =
       ActionController(name: 'ConfiguracoesStoreBase', context: context);
 

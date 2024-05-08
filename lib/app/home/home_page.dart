@@ -1,4 +1,3 @@
-import 'package:armazemf/app/models/item.dart';
 import 'package:armazemf/app/stores/home_page_store.dart';
 import 'package:armazemf/app/widgets/base_page.dart';
 import 'package:armazemf/app/widgets/dialog_base.dart';
@@ -6,7 +5,6 @@ import 'package:asuka/asuka.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -58,7 +56,9 @@ class _HomePageState extends State<HomePage> {
                           subtitle: Text('Descrição: ${iten['descricao']}'),
                           trailing: Text(
                               'Unidades: ${iten['qtdunitaria'].toString()}'),
-                          onTap: () {},
+                          onTap: () {
+                            Modular.to.pushNamed('/show/item/${iten['id']}');
+                          },
                         ),
                       );
                     },
