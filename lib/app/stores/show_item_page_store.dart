@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:armazemf/app/models/item.dart';
 import 'package:armazemf/app/service/itens_service.dart';
-import 'package:armazemf/app/service/user_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'show_item_page_store.g.dart';
@@ -29,17 +28,11 @@ abstract class ShowItemPageStoreBase with Store {
         updatedAt: value.data['updated_at'].toString(),
 
       );
-      await getCreateItenUser(value.data['user_id'].toString());
     });
     log(item!.nome.toString(), name: 'agas');
   }
 
-  getCreateItenUser(String id) async {
-    await UserService().showUserById(id).then((value) async {
-      log(value.data.toString(), name: 'Create User');
-       cretaeUser = value.data['name'].toString();
-    });
-  }
+
 
   @action
   dispose() {}

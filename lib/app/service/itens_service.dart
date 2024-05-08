@@ -89,7 +89,24 @@ class ItensService {
     }
   }
 
-  Future creteIten() async{
-    
+  Future creteIten(Map credenciais, String userId) async{
+      try {
+      Response response;
+      response = await dio.post(
+          'http://192.168.15.158:8000/api/createiten/${userId}',
+        data: credenciais,
+      );
+      log(response.toString());
+      return response;
+    } on DioException catch (e) {
+      if (e.response != null) {
+        log('1Erro: ${e.response!.data}');
+      } else {
+        log('2Erro: ${e.message}');
+      }
+    } catch (e) {
+      log('Erro: ${e}');
+    }
   }
+  
 }
