@@ -2,6 +2,10 @@ import 'dart:developer';
 
 import 'package:armazemf/app/models/item.dart';
 import 'package:armazemf/app/service/itens_service.dart';
+import 'package:armazemf/app/widgets/dialog_base.dart';
+import 'package:asuka/asuka.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
 part 'show_item_page_store.g.dart';
@@ -42,6 +46,29 @@ abstract class ShowItemPageStoreBase with Store {
       );
       log(item!.toJson().toString(), name: 'Item');
     }).whenComplete(() => setLoading());
+  }
+
+  @action
+  deleteItem(String itemId) async {
+    await ItensService().deleteItem(itemId).whenComplete(() {
+      Asuka.showDialog(
+        builder: (Dialogcontext) {
+          return DialogBase(
+            title: 'Item excluido com sucesso!',
+            content: Container(),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(Dialogcontext);
+                  Modular.to.pushNamed('/');
+                },
+                child: const Text('ok'),
+              ),
+            ],
+          );
+        },
+      );
+    });
   }
 
   @action

@@ -76,9 +76,9 @@ abstract class CreateEditPageStoreBase with Store {
       Asuka.showDialog(
         builder: (BuildContext dialogcontext) {
           return DialogBase(
-            title: 'Você deseja sair?',
+            title: 'Suceeso!',
             content: const Text(
-              'Você ira perder tudo que fez!',
+              'Item criado com suceeso!',
             ),
             actions: <Widget>[
               TextButton(

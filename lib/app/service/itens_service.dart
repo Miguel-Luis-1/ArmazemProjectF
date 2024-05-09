@@ -73,11 +73,12 @@ class ItensService {
       log('Erro: $e');
     }
   }
+
   Future getItenById(String id) async {
     try {
       Response response;
-      response = await dio.get(
-          'http://192.168.15.158:8000/api/showoneiten/${id}');
+      response =
+          await dio.get('http://192.168.15.158:8000/api/showoneiten/${id}');
       log(response.toString());
       return response;
     } on DioException catch (e) {
@@ -91,11 +92,11 @@ class ItensService {
     }
   }
 
-  Future creteIten(Map credenciais, String userId) async{
-      try {
+  Future creteIten(Map credenciais, String userId) async {
+    try {
       Response response;
       response = await dio.post(
-          'http://192.168.15.158:8000/api/createiten/${userId}',
+        'http://192.168.15.158:8000/api/createiten/${userId}',
         data: credenciais,
       );
       log(response.toString());
@@ -110,5 +111,23 @@ class ItensService {
       log('Erro: $e');
     }
   }
-  
+
+  Future deleteItem(String itemId) async {
+    try {
+      Response response;
+      response = await dio.delete(
+        'http://192.168.15.158:8000/api/deleteiten/${itemId}',
+      );
+      log(response.toString());
+      return response;
+    } on DioException catch (e) {
+      if (e.response != null) {
+        log('1Erro: ${e.response!.data}');
+      } else {
+        log('2Erro: ${e.message}');
+      }
+    } catch (e) {
+      log('Erro: $e');
+    }
+  }
 }
