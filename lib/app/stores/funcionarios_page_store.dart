@@ -19,6 +19,8 @@ abstract class FuncionariosPageStoreBase with Store {
   bool diaogIsOpen = false;
   @observable
   User? user;
+  @observable
+  late Map<String, dynamic> funcionario;
 
   @action
   setDialogState() {
@@ -49,6 +51,18 @@ abstract class FuncionariosPageStoreBase with Store {
       var list = value.data['users'];
       funcionarios.addAll(list);
       log(funcionarios.toString(), name: 'Funci');
+    });
+  }
+
+  @action
+  getFuncionari(String userId) async {
+    await UserService().showFuncionario(userId).then((value) {
+      funcionario = {
+        'nome': value.data['user']['name'],
+        'email': value.data['user']['email'],
+        'isGerente': value.data['user']['is_gerente'],
+      };
+      log(funcionario.toString(), name: 'Funcionario');
     });
   }
 

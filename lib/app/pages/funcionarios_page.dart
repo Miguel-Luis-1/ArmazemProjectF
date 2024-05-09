@@ -58,7 +58,9 @@ class _FuncionariosPageState extends State<FuncionariosPage> {
                       title: Text(funcionario['name']),
                       subtitle: Text(
                           'Gerente: ${isGerente(funcionario['is_gerente'])}'),
-                      onTap: () {},
+                      onTap: () {
+                        store.getFuncionari(funcionario['id'].toString());
+                      },
                     ),
                   );
                 },
