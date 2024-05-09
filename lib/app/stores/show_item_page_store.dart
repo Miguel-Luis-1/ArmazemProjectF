@@ -31,7 +31,7 @@ abstract class ShowItemPageStoreBase with Store {
     setLoading();
     await ItensService().getItenById(id).then((value) async {
       log(value.data['user_id'].toString(), name: 'User Id');
-      item = await Item(
+      item = Item(
         id: value.data['id'],
         codigo: value.data['codigo'],
         nome: value.data['nome'],
@@ -44,7 +44,7 @@ abstract class ShowItemPageStoreBase with Store {
         updatedAt: value.data['updated_at'].toString(),
         empresaId: value.data['empresa_id'].toString(),
       );
-      log(item!.toJson().toString(), name: 'Item');
+      log(item.toJson().toString(), name: 'Item');
     }).whenComplete(() => setLoading());
   }
 
@@ -52,14 +52,14 @@ abstract class ShowItemPageStoreBase with Store {
   deleteItem(String itemId) async {
     await ItensService().deleteItem(itemId).whenComplete(() {
       Asuka.showDialog(
-        builder: (Dialogcontext) {
+        builder: (dialogcontext) {
           return DialogBase(
             title: 'Item excluido com sucesso!',
             content: Container(),
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.pop(Dialogcontext);
+                  Navigator.pop(dialogcontext);
                   Modular.to.pushNamed('/');
                 },
                 child: const Text('ok'),

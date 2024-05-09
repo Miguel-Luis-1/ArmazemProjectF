@@ -5,6 +5,7 @@ class ShowText extends StatelessWidget {
   final String text;
 
   const ShowText({
+    super.key,
     required this.title,
     required this.text,
   });

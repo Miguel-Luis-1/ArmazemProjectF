@@ -52,7 +52,7 @@ abstract class CreateEditPageStoreBase with Store {
       setIsLoading();
       await ItensService().getItenById(id).then((value) async {
         log(value.data['user_id'].toString(), name: 'User Id');
-        item = await Item(
+        item =  Item(
           id: value.data['id'],
           codigo: value.data['codigo'],
           nome: value.data['nome'],

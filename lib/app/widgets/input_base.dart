@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class InputBase extends StatelessWidget {
   final String title;
@@ -9,6 +8,7 @@ class InputBase extends StatelessWidget {
   final bool isPassword;
 
   const InputBase({
+    super.key,
     required this.title,
     required this.alert,
     required this.textController,

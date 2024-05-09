@@ -34,6 +34,7 @@ class AppModule extends Module {
     ChildRoute('/create/:id', child: (_, args) {
       log(args.params.toString(), name: 'Id');
       return CreateEditPage(
+        // ignore: void_checks
         log,
         id: args.params['id'].toString(),
       );
