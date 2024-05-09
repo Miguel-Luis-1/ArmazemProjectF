@@ -41,11 +41,16 @@ class _CreateEditPageState extends State<CreateEditPage> {
                   const SizedBox(
                     height: 15,
                   ),
-                  const Center(
-                    child: Text(
-                      'Faça o cadastro de um item',
-                      style: TextStyle(fontSize: 30),
-                    ),
+                  Center(
+                    child: widget.id == ''
+                        ? const Text(
+                            'Faça o cadastro de um item',
+                            style: TextStyle(fontSize: 30),
+                          )
+                        : const Text(
+                            'Edite o seu item',
+                            style: TextStyle(fontSize: 30),
+                          ),
                   ),
                   InputBase(
                     title: 'Codigo do Produto',
@@ -92,13 +97,22 @@ class _CreateEditPageState extends State<CreateEditPage> {
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            store.create(context);
+                            if (widget.id == '') {
+                              store.create(context);
+                            } else {
+                              store.edit(context);
+                            }
                           }
                         },
-                        child: const Text(
-                          'Cadastrar',
-                          style: TextStyle(color: Colors.white),
-                        ),
+                        child: widget.id == ''
+                            ? const Text(
+                                'Cadastrar',
+                                style: TextStyle(color: Colors.white),
+                              )
+                            : const Text(
+                                'Editar',
+                                style: TextStyle(color: Colors.white),
+                              ),
                       ),
                     ),
                   ),

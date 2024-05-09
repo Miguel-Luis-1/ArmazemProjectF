@@ -74,6 +74,7 @@ class _ShowItemPageState extends State<ShowItemPage> {
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
+                                      Modular.to.pushNamed('/create/${store.item.id}');
                                     },
                                     style: const ButtonStyle(
                                         backgroundColor:

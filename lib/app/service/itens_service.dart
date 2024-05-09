@@ -78,7 +78,7 @@ class ItensService {
     try {
       Response response;
       response =
-          await dio.get('http://192.168.15.158:8000/api/showoneiten/${id}');
+          await dio.get('http://192.168.15.158:8000/api/showoneiten/$id');
       log(response.toString());
       return response;
     } on DioException catch (e) {
@@ -96,7 +96,7 @@ class ItensService {
     try {
       Response response;
       response = await dio.post(
-        'http://192.168.15.158:8000/api/createiten/${userId}',
+        'http://192.168.15.158:8000/api/createiten/$userId',
         data: credenciais,
       );
       log(response.toString());
@@ -116,7 +116,27 @@ class ItensService {
     try {
       Response response;
       response = await dio.delete(
-        'http://192.168.15.158:8000/api/deleteiten/${itemId}',
+        'http://192.168.15.158:8000/api/deleteiten/$itemId',
+      );
+      log(response.toString());
+      return response;
+    } on DioException catch (e) {
+      if (e.response != null) {
+        log('1Erro: ${e.response!.data}');
+      } else {
+        log('2Erro: ${e.message}');
+      }
+    } catch (e) {
+      log('Erro: $e');
+    }
+  }
+
+  Future editItem(Map credenciais, String itemId) async {
+    try {
+      Response response;
+      response = await dio.put(
+        'http://192.168.15.158:8000/api/editeiten/$itemId',
+        data: credenciais,
       );
       log(response.toString());
       return response;
