@@ -68,6 +68,14 @@ mixin _$ShowItemPageStore on ShowItemPageStoreBase, Store {
     return _$getItemAsyncAction.run(() => super.getItem(id));
   }
 
+  late final _$deleteItemAsyncAction =
+      AsyncAction('ShowItemPageStoreBase.deleteItem', context: context);
+
+  @override
+  Future deleteItem(String itemId) {
+    return _$deleteItemAsyncAction.run(() => super.deleteItem(itemId));
+  }
+
   late final _$ShowItemPageStoreBaseActionController =
       ActionController(name: 'ShowItemPageStoreBase', context: context);
 

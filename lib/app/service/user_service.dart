@@ -97,11 +97,11 @@ class UserService {
     }
   }
 
-  Future showUserById(String id) async{
+  Future showUserById(String id) async {
     try {
       Response response;
-      response = await dio.get(
-          'http://192.168.15.158:8000/api/showoneuser/${id}');
+      response =
+          await dio.get('http://192.168.15.158:8000/api/showoneuser/$id');
       log(response.toString());
       return response;
     } on DioException catch (e) {
@@ -112,6 +112,24 @@ class UserService {
       }
     } catch (e) {
       log('Erro: ${e}');
+    }
+  }
+
+  Future showFuncionarios(String empresaId) async {
+    try {
+      Response response;
+      response = await dio
+          .get('http://192.168.15.158:8000/api/showoneempresaf/$empresaId');
+      log(response.toString());
+      return response;
+    } on DioException catch (e) {
+      if (e.response != null) {
+        log('1Erro: ${e.response!.data}');
+      } else {
+        log('2Erro: ${e.message}');
+      }
+    } catch (e) {
+      log('Erro: $e');
     }
   }
 }

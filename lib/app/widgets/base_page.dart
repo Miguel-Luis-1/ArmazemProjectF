@@ -20,8 +20,6 @@ class BasePage extends StatefulWidget {
 }
 
 class _BasePageState extends State<BasePage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,53 +36,67 @@ class _BasePageState extends State<BasePage> {
             ),
             textDirection: TextDirection.ltr),
       ),
-      drawer: widget.drawer ? Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color(0xFF247BA0),
+      drawer: widget.drawer
+          ? Drawer(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: <Widget>[
+                  const DrawerHeader(
+                    decoration: BoxDecoration(
+                      color: Color(0xFF247BA0),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.inventory_outlined,
+                        color: Colors.white,
+                        size: 100,
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: const Text('Lista de Produtos'),
+                    leading: const Icon(Icons.list),
+                    onTap: () {
+                      if (Modular.to.path == '/') {
+                        Navigator.pop(context);
+                      } else {
+                        Modular.to.pushNamed('/');
+                      }
+                    },
+                  ),
+                  const Divider(),
+                  ListTile(
+                    title: const Text('Funcionários'),
+                    leading: const Icon(Icons.group),
+                    onTap: () {
+                      if (Modular.to.path == '/funcionarios') {
+                        Navigator.pop(context);
+                      } else {
+                        Modular.to.pushNamed('/funcionarios');
+                      }
+                    },
+                  ),
+                  const Divider(),
+                  ListTile(
+                    title: const Text('Configurações'),
+                    leading: const Icon(Icons.settings),
+                    onTap: () {
+                      if (Modular.to.path == '/config') {
+                        Navigator.pop(context);
+                      } else {
+                        Modular.to.pushNamed('/config');
+                      }
+                    },
+                  ),
+                ],
               ),
-              child: Center(
-                child: Icon(
-                  Icons.inventory_outlined,
-                  color: Colors.white,
-                  size: 100,
-                ),
-              ),
-            ),
-            ListTile(
-              title: const Text('Lista de Produtos'),
-              leading: const Icon(Icons.list),
-              onTap: () {
-                if (Modular.to.path == '/') {
-                  Navigator.pop(context);
-                } else {
-                  Modular.to.pushNamed('/');
-                }
-              },
-            ),
-            const Divider(),
-            ListTile(
-              title: const Text('Configurações'),
-              leading: const Icon(Icons.settings),
-              onTap: () {
-                if (Modular.to.path == '/config') {
-                  Navigator.pop(context);
-                } else {
-                 Modular.to.pushNamed('/config');
-                }
-              },
-            ),
-          ],
-        ),
-      ): null,
+            )
+          : null,
       body: widget.body,
       floatingActionButton: Visibility(
         visible: widget.bntAdd,
         child: FloatingActionButton(
-          onPressed: ()=> Modular.to.pushNamed('/create'),
+          onPressed: () => Modular.to.pushNamed('/create'),
           backgroundColor: const Color(0xFF247BA0),
           child: const Icon(
             Icons.add,

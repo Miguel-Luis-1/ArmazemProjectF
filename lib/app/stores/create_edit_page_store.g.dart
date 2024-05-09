@@ -170,6 +170,38 @@ mixin _$CreateEditPageStore on CreateEditPageStoreBase, Store {
     });
   }
 
+  late final _$isLoadingAtom =
+      Atom(name: 'CreateEditPageStoreBase.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
+  late final _$getItenAsyncAction =
+      AsyncAction('CreateEditPageStoreBase.getIten', context: context);
+
+  @override
+  Future getIten(String? id) {
+    return _$getItenAsyncAction.run(() => super.getIten(id));
+  }
+
+  late final _$editAsyncAction =
+      AsyncAction('CreateEditPageStoreBase.edit', context: context);
+
+  @override
+  Future edit(BuildContext context) {
+    return _$editAsyncAction.run(() => super.edit(context));
+  }
+
   late final _$createAsyncAction =
       AsyncAction('CreateEditPageStoreBase.create', context: context);
 
@@ -182,11 +214,11 @@ mixin _$CreateEditPageStore on CreateEditPageStoreBase, Store {
       ActionController(name: 'CreateEditPageStoreBase', context: context);
 
   @override
-  dynamic getIten(String? id) {
+  dynamic setIsLoading() {
     final _$actionInfo = _$CreateEditPageStoreBaseActionController.startAction(
-        name: 'CreateEditPageStoreBase.getIten');
+        name: 'CreateEditPageStoreBase.setIsLoading');
     try {
-      return super.getIten(id);
+      return super.setIsLoading();
     } finally {
       _$CreateEditPageStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -215,7 +247,8 @@ descricaoController: ${descricaoController},
 categoriaController: ${categoriaController},
 precoController: ${precoController},
 qtdunitariaController: ${qtdunitariaController},
-user: ${user}
+user: ${user},
+isLoading: ${isLoading}
     ''';
   }
 }

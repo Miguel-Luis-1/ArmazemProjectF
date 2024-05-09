@@ -4,12 +4,14 @@ import 'package:armazemf/app/home/home_page.dart';
 import 'package:armazemf/app/pages/cadastro_page.dart';
 import 'package:armazemf/app/pages/configuracoes_page.dart';
 import 'package:armazemf/app/pages/create_edit_page.dart';
+import 'package:armazemf/app/pages/funcionarios_page.dart';
 import 'package:armazemf/app/pages/login_page.dart';
 import 'package:armazemf/app/pages/show_item_page.dart';
 import 'package:armazemf/app/stores/back_dialog_store.dart';
 import 'package:armazemf/app/stores/cadastro_page_store.dart';
 import 'package:armazemf/app/stores/configuracoes_store.dart';
 import 'package:armazemf/app/stores/create_edit_page_store.dart';
+import 'package:armazemf/app/stores/funcionarios_page_store.dart';
 import 'package:armazemf/app/stores/home_page_store.dart';
 import 'package:armazemf/app/stores/login_page_store.dart';
 import 'package:armazemf/app/stores/show_item_page_store.dart';
@@ -25,6 +27,7 @@ class AppModule extends Module {
     Bind.singleton((i) => CreateEditPageStore()),
     Bind.singleton((i) => BackDialogStore()),
     Bind.singleton((i) => ShowItemPageStore()),
+    Bind.singleton((i) => FuncionariosPageStore()),
   ];
 
   @override
@@ -47,6 +50,7 @@ class AppModule extends Module {
         id: args.params['id'].toString(),
       );
     }),
+    ChildRoute('/funcionarios', child: (context, args) => const FuncionariosPage()),
 
   ];
 }
