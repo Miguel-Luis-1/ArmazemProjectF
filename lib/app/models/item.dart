@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 
 class Item {
   int? id;
@@ -6,7 +5,7 @@ class Item {
   String nome;
   String categoria;
   String descricao;
-  double preco;
+  String preco;
   int qtdunitaria;
   String? createdAt;
   String? updatedAt;

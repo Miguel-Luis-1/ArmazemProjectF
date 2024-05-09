@@ -57,6 +57,127 @@ mixin _$CreateEditPageStore on CreateEditPageStoreBase, Store {
     });
   }
 
+  late final _$codigoControllerAtom =
+      Atom(name: 'CreateEditPageStoreBase.codigoController', context: context);
+
+  @override
+  TextEditingController get codigoController {
+    _$codigoControllerAtom.reportRead();
+    return super.codigoController;
+  }
+
+  @override
+  set codigoController(TextEditingController value) {
+    _$codigoControllerAtom.reportWrite(value, super.codigoController, () {
+      super.codigoController = value;
+    });
+  }
+
+  late final _$nomeControllerAtom =
+      Atom(name: 'CreateEditPageStoreBase.nomeController', context: context);
+
+  @override
+  TextEditingController get nomeController {
+    _$nomeControllerAtom.reportRead();
+    return super.nomeController;
+  }
+
+  @override
+  set nomeController(TextEditingController value) {
+    _$nomeControllerAtom.reportWrite(value, super.nomeController, () {
+      super.nomeController = value;
+    });
+  }
+
+  late final _$descricaoControllerAtom = Atom(
+      name: 'CreateEditPageStoreBase.descricaoController', context: context);
+
+  @override
+  TextEditingController get descricaoController {
+    _$descricaoControllerAtom.reportRead();
+    return super.descricaoController;
+  }
+
+  @override
+  set descricaoController(TextEditingController value) {
+    _$descricaoControllerAtom.reportWrite(value, super.descricaoController, () {
+      super.descricaoController = value;
+    });
+  }
+
+  late final _$categoriaControllerAtom = Atom(
+      name: 'CreateEditPageStoreBase.categoriaController', context: context);
+
+  @override
+  TextEditingController get categoriaController {
+    _$categoriaControllerAtom.reportRead();
+    return super.categoriaController;
+  }
+
+  @override
+  set categoriaController(TextEditingController value) {
+    _$categoriaControllerAtom.reportWrite(value, super.categoriaController, () {
+      super.categoriaController = value;
+    });
+  }
+
+  late final _$precoControllerAtom =
+      Atom(name: 'CreateEditPageStoreBase.precoController', context: context);
+
+  @override
+  TextEditingController get precoController {
+    _$precoControllerAtom.reportRead();
+    return super.precoController;
+  }
+
+  @override
+  set precoController(TextEditingController value) {
+    _$precoControllerAtom.reportWrite(value, super.precoController, () {
+      super.precoController = value;
+    });
+  }
+
+  late final _$qtdunitariaControllerAtom = Atom(
+      name: 'CreateEditPageStoreBase.qtdunitariaController', context: context);
+
+  @override
+  TextEditingController get qtdunitariaController {
+    _$qtdunitariaControllerAtom.reportRead();
+    return super.qtdunitariaController;
+  }
+
+  @override
+  set qtdunitariaController(TextEditingController value) {
+    _$qtdunitariaControllerAtom.reportWrite(value, super.qtdunitariaController,
+        () {
+      super.qtdunitariaController = value;
+    });
+  }
+
+  late final _$userAtom =
+      Atom(name: 'CreateEditPageStoreBase.user', context: context);
+
+  @override
+  User? get user {
+    _$userAtom.reportRead();
+    return super.user;
+  }
+
+  @override
+  set user(User? value) {
+    _$userAtom.reportWrite(value, super.user, () {
+      super.user = value;
+    });
+  }
+
+  late final _$createAsyncAction =
+      AsyncAction('CreateEditPageStoreBase.create', context: context);
+
+  @override
+  Future create(BuildContext context) {
+    return _$createAsyncAction.run(() => super.create(context));
+  }
+
   late final _$CreateEditPageStoreBaseActionController =
       ActionController(name: 'CreateEditPageStoreBase', context: context);
 
@@ -87,7 +208,14 @@ mixin _$CreateEditPageStore on CreateEditPageStoreBase, Store {
     return '''
 itens: ${itens},
 item: ${item},
-titlePage: ${titlePage}
+titlePage: ${titlePage},
+codigoController: ${codigoController},
+nomeController: ${nomeController},
+descricaoController: ${descricaoController},
+categoriaController: ${categoriaController},
+precoController: ${precoController},
+qtdunitariaController: ${qtdunitariaController},
+user: ${user}
     ''';
   }
 }

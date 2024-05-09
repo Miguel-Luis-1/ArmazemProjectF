@@ -20,7 +20,7 @@ class InputBase extends StatelessWidget {
   Widget build(BuildContext context) {
     getTipe(isNuber) {
       if (isNuber) {
-        return TextInputType.number;
+        return const TextInputType.numberWithOptions(decimal: true);
       } else {
         return TextInputType.text;
       }
@@ -48,9 +48,6 @@ class InputBase extends StatelessWidget {
             border: InputBorder.none,
           ),
           keyboardType: getTipe(isNuber),
-          inputFormatters: isNuber ? <TextInputFormatter>[
-            FilteringTextInputFormatter.digitsOnly
-          ] : null,
           validator: (value) {
             if (value!.isEmpty) {
               return alert;

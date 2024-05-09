@@ -54,7 +54,7 @@ abstract class CreateEditPageStoreBase with Store {
       'nome': nomeController.text,
       'categoria': categoriaController.text,
       'descricao': descricaoController.text,
-      'preco': precoController.text,
+      'preco':  double.tryParse(precoController.text),
       'qtdunitaria': qtdunitariaController.text,
     };
     SharedPreferences sharedPreferences;

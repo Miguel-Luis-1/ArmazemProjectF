@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:developer';
 
@@ -25,7 +27,7 @@ class ItensService {
 
   Future getItens(BuildContext context) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    String? user = await sharedPreferences.getString('user');
+    String? user = sharedPreferences.getString('user');
     try {
       if (user != null) {
         Map<String, dynamic> userMap = jsonDecode(user);
@@ -68,7 +70,7 @@ class ItensService {
         log('2Erro: ${e.message}');
       }
     } catch (e) {
-      log('Erro: ${e}');
+      log('Erro: $e');
     }
   }
   Future getItenById(String id) async {
@@ -85,7 +87,7 @@ class ItensService {
         log('2Erro: ${e.message}');
       }
     } catch (e) {
-      log('Erro: ${e}');
+      log('Erro: $e');
     }
   }
 
@@ -105,7 +107,7 @@ class ItensService {
         log('2Erro: ${e.message}');
       }
     } catch (e) {
-      log('Erro: ${e}');
+      log('Erro: $e');
     }
   }
   

@@ -13,20 +13,74 @@ mixin _$ShowItemPageStore on ShowItemPageStoreBase, Store {
       Atom(name: 'ShowItemPageStoreBase.item', context: context);
 
   @override
-  Item? get item {
+  Item get item {
     _$itemAtom.reportRead();
     return super.item;
   }
 
+  bool _itemIsInitialized = false;
+
   @override
-  set item(Item? value) {
-    _$itemAtom.reportWrite(value, super.item, () {
+  set item(Item value) {
+    _$itemAtom.reportWrite(value, _itemIsInitialized ? super.item : null, () {
       super.item = value;
+      _itemIsInitialized = true;
     });
+  }
+
+  late final _$cretaeUserAtom =
+      Atom(name: 'ShowItemPageStoreBase.cretaeUser', context: context);
+
+  @override
+  String? get cretaeUser {
+    _$cretaeUserAtom.reportRead();
+    return super.cretaeUser;
+  }
+
+  @override
+  set cretaeUser(String? value) {
+    _$cretaeUserAtom.reportWrite(value, super.cretaeUser, () {
+      super.cretaeUser = value;
+    });
+  }
+
+  late final _$isLoadingAtom =
+      Atom(name: 'ShowItemPageStoreBase.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
+  late final _$getItemAsyncAction =
+      AsyncAction('ShowItemPageStoreBase.getItem', context: context);
+
+  @override
+  Future getItem(String id) {
+    return _$getItemAsyncAction.run(() => super.getItem(id));
   }
 
   late final _$ShowItemPageStoreBaseActionController =
       ActionController(name: 'ShowItemPageStoreBase', context: context);
+
+  @override
+  dynamic setLoading() {
+    final _$actionInfo = _$ShowItemPageStoreBaseActionController.startAction(
+        name: 'ShowItemPageStoreBase.setLoading');
+    try {
+      return super.setLoading();
+    } finally {
+      _$ShowItemPageStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic dispose() {
@@ -42,7 +96,9 @@ mixin _$ShowItemPageStore on ShowItemPageStoreBase, Store {
   @override
   String toString() {
     return '''
-item: ${item}
+item: ${item},
+cretaeUser: ${cretaeUser},
+isLoading: ${isLoading}
     ''';
   }
 }
