@@ -77,6 +77,22 @@ mixin _$FuncionariosPageStore on FuncionariosPageStoreBase, Store {
     });
   }
 
+  late final _$isLoadingAtom =
+      Atom(name: 'FuncionariosPageStoreBase.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   late final _$getFuncionariosAsyncAction = AsyncAction(
       'FuncionariosPageStoreBase.getFuncionarios',
       context: context);
@@ -95,8 +111,27 @@ mixin _$FuncionariosPageStore on FuncionariosPageStoreBase, Store {
     return _$getFuncionariAsyncAction.run(() => super.getFuncionari(userId));
   }
 
+  late final _$deleteAsyncAction =
+      AsyncAction('FuncionariosPageStoreBase.delete', context: context);
+
+  @override
+  Future delete(String userId, BuildContext context) {
+    return _$deleteAsyncAction.run(() => super.delete(userId, context));
+  }
+
   late final _$FuncionariosPageStoreBaseActionController =
       ActionController(name: 'FuncionariosPageStoreBase', context: context);
+
+  @override
+  dynamic setIsLoading() {
+    final _$actionInfo = _$FuncionariosPageStoreBaseActionController
+        .startAction(name: 'FuncionariosPageStoreBase.setIsLoading');
+    try {
+      return super.setIsLoading();
+    } finally {
+      _$FuncionariosPageStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic setDialogState() {
@@ -126,7 +161,8 @@ mixin _$FuncionariosPageStore on FuncionariosPageStoreBase, Store {
 funcionarios: ${funcionarios},
 diaogIsOpen: ${diaogIsOpen},
 user: ${user},
-funcionario: ${funcionario}
+funcionario: ${funcionario},
+isLoading: ${isLoading}
     ''';
   }
 }

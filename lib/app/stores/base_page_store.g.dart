@@ -25,6 +25,22 @@ mixin _$BasePageStore on BasePageStoreBase, Store {
     });
   }
 
+  late final _$isGerenteAtom =
+      Atom(name: 'BasePageStoreBase.isGerente', context: context);
+
+  @override
+  bool get isGerente {
+    _$isGerenteAtom.reportRead();
+    return super.isGerente;
+  }
+
+  @override
+  set isGerente(bool value) {
+    _$isGerenteAtom.reportWrite(value, super.isGerente, () {
+      super.isGerente = value;
+    });
+  }
+
   late final _$getUserAsyncAction =
       AsyncAction('BasePageStoreBase.getUser', context: context);
 
@@ -61,7 +77,8 @@ mixin _$BasePageStore on BasePageStoreBase, Store {
   @override
   String toString() {
     return '''
-user: ${user}
+user: ${user},
+isGerente: ${isGerente}
     ''';
   }
 }

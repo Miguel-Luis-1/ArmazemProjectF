@@ -168,4 +168,27 @@ class UserService {
       log('Erro: $e');
     }
   }
+
+  Future promoverFuncionario(String userId) async {
+    try {
+      Map credenciais = {
+        'is_gerente': true,
+      };
+      Response response;
+      response = await dio.put(
+        'http://192.168.15.158:8000/api/edituser/$userId',
+        data: credenciais,
+      );
+      log(response.toString());
+      return response;
+    } on DioException catch (e) {
+      if (e.response != null) {
+        log('1Erro: ${e.response!.data}');
+      } else {
+        log('2Erro: ${e.message}');
+      }
+    } catch (e) {
+      log('Erro: $e');
+    }
+  }
 }

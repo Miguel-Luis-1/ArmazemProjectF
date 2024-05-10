@@ -21,6 +21,14 @@ abstract class FuncionariosPageStoreBase with Store {
   User? user;
   @observable
   late Map<String, dynamic> funcionario;
+  @observable
+  bool isLoading = false;
+
+  @action
+  setIsLoading() {
+    isLoading = !isLoading;
+    log(isLoading.toString());
+  }
 
   @action
   setDialogState() {
@@ -29,6 +37,8 @@ abstract class FuncionariosPageStoreBase with Store {
 
   @action
   getFuncionarios(BuildContext context) async {
+    setIsLoading();
+    dispose();
     SharedPreferences sharedPreferences;
     sharedPreferences = await SharedPreferences.getInstance();
     String? dados = sharedPreferences.getString('user');
@@ -52,7 +62,7 @@ abstract class FuncionariosPageStoreBase with Store {
       var list = value.data['users'];
       funcionarios.addAll(list);
       log(funcionarios.toString(), name: 'Funci');
-    });
+    }).whenComplete(() => setIsLoading());
   }
 
   @action
@@ -65,6 +75,22 @@ abstract class FuncionariosPageStoreBase with Store {
       };
       log(funcionario.toString(), name: 'Funcionario');
     });
+  }
+
+  @action
+  delete(String userId, BuildContext context) async {
+    await UserService().deleteUser(userId).then((value) {
+      log(value.toString());
+      // final snackBar = SnackBar(content: Text('${value.data['Status']}'));
+      // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }).whenComplete(() => getFuncionarios(context));
+  }
+
+  @action
+  promover(String userId, BuildContext context) async {
+    await UserService()
+        .promoverFuncionario(userId)
+        .whenComplete(() => getFuncionarios(context));
   }
 
   @action
