@@ -83,7 +83,7 @@ class _BasePageState extends State<BasePage> {
                                 children: [
                                   Text('Email: ${store.user!.email}'),
                                   Visibility(
-                                    visible: store.user!.isGerente == 0,
+                                    visible: store.isGerente,
                                     child: const Text('Perfil Gerente'),
                                   ),
                                 ],

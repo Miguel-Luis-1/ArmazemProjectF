@@ -136,8 +136,26 @@ class UserService {
   Future showFuncionario(String userId) async {
     try {
       Response response;
-      response = await dio
-          .get('http://192.168.15.158:8000/api/showoneuser/$userId');
+      response =
+          await dio.get('http://192.168.15.158:8000/api/showoneuser/$userId');
+      log(response.toString());
+      return response;
+    } on DioException catch (e) {
+      if (e.response != null) {
+        log('1Erro: ${e.response!.data}');
+      } else {
+        log('2Erro: ${e.message}');
+      }
+    } catch (e) {
+      log('Erro: $e');
+    }
+  }
+
+  Future deleteUser(String userId) async {
+    try {
+      Response response;
+      response =
+          await dio.delete('http://192.168.15.158:8000/api/deleteuser/$userId');
       log(response.toString());
       return response;
     } on DioException catch (e) {

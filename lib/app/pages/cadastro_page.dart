@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:armazemf/app/stores/cadastro_page_store.dart';
 import 'package:armazemf/app/widgets/back_dialog.dart';
 import 'package:armazemf/app/widgets/base_page.dart';
@@ -94,6 +96,7 @@ class _CadastroPageState extends State<CadastroPage> {
                             value: store.isGerente,
                             onChanged: (value) {
                               store.isGerente = value;
+                              log(value.toString());
                             },
                           ),
                         ],

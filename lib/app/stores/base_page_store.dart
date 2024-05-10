@@ -45,7 +45,7 @@ abstract class BasePageStoreBase with Store {
         empresaId: userMap['empresa_id'].toString(),
         isGerente: userMap['is_gerente'],
       );
-      user!.isGerente == 0 ? isGerente = true : isGerente = false;
+      user!.isGerente == 1 ? isGerente = true : isGerente = false;
     }
   }
 

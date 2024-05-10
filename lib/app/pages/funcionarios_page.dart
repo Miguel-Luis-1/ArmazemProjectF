@@ -22,7 +22,7 @@ class _FuncionariosPageState extends State<FuncionariosPage> {
   }
 
   isGerente(isGerente) {
-    if (isGerente == 0) {
+    if (isGerente == 1) {
       return 'Sim';
     } else {
       return 'Não';
