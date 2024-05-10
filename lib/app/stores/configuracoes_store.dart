@@ -51,6 +51,11 @@ abstract class ConfiguracoesStoreBase with Store {
   }
 
   @action
+  deletConta() async {
+    UserService().deleteUser(user!.id.toString()).whenComplete(() => logout());
+  }
+
+  @action
   dispose() {
     user = null;
   }

@@ -66,6 +66,59 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                           Asuka.showDialog<void>(
                             builder: (BuildContext dialogcontext) {
                               return DialogBase(
+                                title: 'Atenção',
+                                content: const Text(
+                                  'Você deseja excluir sua conta?',
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text(
+                                      'cancelar',
+                                      style: TextStyle(
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(dialogcontext);
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: const Text(
+                                      'Sim',
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      store.deletConta();
+                                      Navigator.pop(dialogcontext);
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        child: const Text(
+                          'Exluir minha conta',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      width: double.infinity,
+                      child: TextButton(
+                        style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(Colors.red),
+                        ),
+                        onPressed: () {
+                          Asuka.showDialog<void>(
+                            builder: (BuildContext dialogcontext) {
+                              return DialogBase(
                                 title: 'Você deseja sair?',
                                 content: const Text(
                                   'Você ira sair da sua conta!',

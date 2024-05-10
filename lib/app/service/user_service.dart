@@ -65,7 +65,7 @@ class UserService {
         log('2Erro: ${e.message}');
       }
     } catch (e) {
-      log('Erro: ${e}');
+      log('Erro: $e');
     }
   }
 
@@ -93,7 +93,7 @@ class UserService {
         log('2Erro: ${e.message}');
       }
     } catch (e) {
-      log('Erro: ${e}');
+      log('Erro: $e');
     }
   }
 
@@ -111,7 +111,7 @@ class UserService {
         log('2Erro: ${e.message}');
       }
     } catch (e) {
-      log('Erro: ${e}');
+      log('Erro: $e');
     }
   }
 
