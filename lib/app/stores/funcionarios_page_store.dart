@@ -41,6 +41,7 @@ abstract class FuncionariosPageStoreBase with Store {
         nome: userMap['name'],
         email: userMap['email'],
         empresaId: userMap['empresa_id'].toString(),
+        isGerente: userMap['is_gerente'],
       );
       log(user!.toJson().toString(), name: 'User');
     }

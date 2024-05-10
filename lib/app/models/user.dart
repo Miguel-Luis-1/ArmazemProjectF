@@ -3,12 +3,14 @@ class User {
   String nome;
   String email;
   String empresaId;
+  int isGerente;
 
   User({
     this.id,
     required this.nome,
     required this.email,
     required this.empresaId,
+    required this.isGerente,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -16,7 +18,8 @@ class User {
       id: json['id'],
       nome: json['nome'],
       email: json['email'],
-      empresaId: json['empresa_id']
+      empresaId: json['empresa_id'],
+      isGerente: json['is_gerente'],
     );
   }
 
@@ -26,6 +29,7 @@ class User {
       'nome': nome,
       'email': email,
       'empresa_id': empresaId,
+      'is_gerente': isGerente,
     };
   }
 }

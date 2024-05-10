@@ -142,6 +142,7 @@ abstract class CreateEditPageStoreBase with Store {
         nome: userMap['name'],
         email: userMap['email'],
         empresaId: userMap['empresaId'],
+        isGerente: userMap['is_gerente'],
       );
     }
     log(data.toString());

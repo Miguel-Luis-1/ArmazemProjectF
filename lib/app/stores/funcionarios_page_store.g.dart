@@ -57,6 +57,44 @@ mixin _$FuncionariosPageStore on FuncionariosPageStoreBase, Store {
     });
   }
 
+  late final _$funcionarioAtom =
+      Atom(name: 'FuncionariosPageStoreBase.funcionario', context: context);
+
+  @override
+  Map<String, dynamic> get funcionario {
+    _$funcionarioAtom.reportRead();
+    return super.funcionario;
+  }
+
+  bool _funcionarioIsInitialized = false;
+
+  @override
+  set funcionario(Map<String, dynamic> value) {
+    _$funcionarioAtom.reportWrite(
+        value, _funcionarioIsInitialized ? super.funcionario : null, () {
+      super.funcionario = value;
+      _funcionarioIsInitialized = true;
+    });
+  }
+
+  late final _$getFuncionariosAsyncAction = AsyncAction(
+      'FuncionariosPageStoreBase.getFuncionarios',
+      context: context);
+
+  @override
+  Future getFuncionarios(BuildContext context) {
+    return _$getFuncionariosAsyncAction
+        .run(() => super.getFuncionarios(context));
+  }
+
+  late final _$getFuncionariAsyncAction =
+      AsyncAction('FuncionariosPageStoreBase.getFuncionari', context: context);
+
+  @override
+  Future getFuncionari(String userId) {
+    return _$getFuncionariAsyncAction.run(() => super.getFuncionari(userId));
+  }
+
   late final _$FuncionariosPageStoreBaseActionController =
       ActionController(name: 'FuncionariosPageStoreBase', context: context);
 
@@ -66,17 +104,6 @@ mixin _$FuncionariosPageStore on FuncionariosPageStoreBase, Store {
         .startAction(name: 'FuncionariosPageStoreBase.setDialogState');
     try {
       return super.setDialogState();
-    } finally {
-      _$FuncionariosPageStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic getFuncionarios(BuildContext context) {
-    final _$actionInfo = _$FuncionariosPageStoreBaseActionController
-        .startAction(name: 'FuncionariosPageStoreBase.getFuncionarios');
-    try {
-      return super.getFuncionarios(context);
     } finally {
       _$FuncionariosPageStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -98,7 +125,8 @@ mixin _$FuncionariosPageStore on FuncionariosPageStoreBase, Store {
     return '''
 funcionarios: ${funcionarios},
 diaogIsOpen: ${diaogIsOpen},
-user: ${user}
+user: ${user},
+funcionario: ${funcionario}
     ''';
   }
 }

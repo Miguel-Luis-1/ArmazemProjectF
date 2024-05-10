@@ -8,6 +8,7 @@ import 'package:armazemf/app/pages/funcionarios_page.dart';
 import 'package:armazemf/app/pages/login_page.dart';
 import 'package:armazemf/app/pages/show_item_page.dart';
 import 'package:armazemf/app/stores/back_dialog_store.dart';
+import 'package:armazemf/app/stores/base_page_store.dart';
 import 'package:armazemf/app/stores/cadastro_page_store.dart';
 import 'package:armazemf/app/stores/configuracoes_store.dart';
 import 'package:armazemf/app/stores/create_edit_page_store.dart';
@@ -28,6 +29,7 @@ class AppModule extends Module {
     Bind.singleton((i) => BackDialogStore()),
     Bind.singleton((i) => ShowItemPageStore()),
     Bind.singleton((i) => FuncionariosPageStore()),
+    Bind.singleton((i) => BasePageStore()),
   ];
 
   @override

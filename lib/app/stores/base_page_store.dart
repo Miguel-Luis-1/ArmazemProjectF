@@ -2,17 +2,19 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:armazemf/app/models/user.dart';
-import 'package:armazemf/app/service/user_service.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-part 'configuracoes_store.g.dart';
+part 'base_page_store.g.dart';
 
-class ConfiguracoesStore = ConfiguracoesStoreBase with _$ConfiguracoesStore;
+class BasePageStore = BasePageStoreBase with _$BasePageStore;
 
-abstract class ConfiguracoesStoreBase with Store {
+abstract class BasePageStoreBase with Store {
   @observable
   User? user;
+
+  @observable
+  bool isGerente = false;
 
   @action
   getUserTeste() {
@@ -32,6 +34,7 @@ abstract class ConfiguracoesStoreBase with Store {
     String? dados = sharedPreferences.getString('user');
     if (dados == null) {
       log('Deslogado');
+      user = null;
     } else {
       log(dados);
       Map<String, dynamic> userMap = jsonDecode(dados);
@@ -42,12 +45,8 @@ abstract class ConfiguracoesStoreBase with Store {
         empresaId: userMap['empresa_id'].toString(),
         isGerente: userMap['is_gerente'],
       );
+      user!.isGerente == 0 ? isGerente = true : isGerente = false;
     }
-  }
-
-  @action
-  logout() async {
-    await UserService().logout();
   }
 
   @action
