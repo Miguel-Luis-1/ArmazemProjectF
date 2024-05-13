@@ -52,7 +52,7 @@ abstract class CreateEditPageStoreBase with Store {
       setIsLoading();
       await ItensService().getItenById(id).then((value) async {
         log(value.data['user_id'].toString(), name: 'User Id');
-        item =  Item(
+        item = Item(
           id: value.data['id'],
           codigo: value.data['codigo'],
           nome: value.data['nome'],
@@ -81,7 +81,7 @@ abstract class CreateEditPageStoreBase with Store {
   }
 
   @action
-  edit(BuildContext context) async{
+  edit(BuildContext context) async {
     Map<String, dynamic> data = {
       'codigo': codigoController.text,
       'nome': nomeController.text,
@@ -135,17 +135,17 @@ abstract class CreateEditPageStoreBase with Store {
     if (dados == null) {
       log('Deslogado');
     } else {
-      log(dados);
+      log(data.toString(), name: 'Item');
+      log(dados, name: 'User');
       Map<String, dynamic> userMap = jsonDecode(dados);
       user = User(
         id: userMap['id'],
         nome: userMap['name'],
         email: userMap['email'],
-        empresaId: userMap['empresaId'],
+        empresaId: userMap['empresaId'].toString(),
         isGerente: userMap['is_gerente'],
       );
     }
-    log(data.toString());
     await ItensService().creteIten(data, user!.id.toString()).whenComplete(() {
       Asuka.showDialog(
         builder: (BuildContext dialogcontext) {

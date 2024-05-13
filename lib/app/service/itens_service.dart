@@ -6,6 +6,7 @@ import 'dart:developer';
 import 'package:armazemf/app/widgets/un_connect_dilog.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ItensService {
@@ -35,8 +36,8 @@ class ItensService {
         Map<String, dynamic> userMap = jsonDecode(user);
         log(userMap['empresa_id'].toString());
         Response response;
-        response = await dio.get(
-            '$baseURL/showoneempresai/${userMap['empresa_id']}');
+        response =
+            await dio.get('$baseURL/showoneempresai/${userMap['empresa_id']}');
         log(response.toString());
         return response;
       } else {
@@ -62,11 +63,19 @@ class ItensService {
             sharedPreferences.remove('user');
             unConnectDilog(context);
             break;
-          default:
+          case 'Empresa não tem itens cadastrados':
+            const snackBar =
+                SnackBar(content: Text('Empresa não tem itens cadastrados'));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+          case 'Empresa não encontrada':
             SharedPreferences sharedPreferences =
                 await SharedPreferences.getInstance();
             sharedPreferences.remove('user');
-            unConnectDilog(context);
+            final snackBar =
+                SnackBar(content: Text('${e.response!.data['message']}'));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            Modular.to.pushNamed('/cadastro');
         }
       } else {
         log('2Erro: ${e.message}');
@@ -79,8 +88,7 @@ class ItensService {
   Future getItenById(String id) async {
     try {
       Response response;
-      response =
-          await dio.get('$baseURL/showoneiten/$id');
+      response = await dio.get('$baseURL/showoneiten/$id');
       log(response.toString());
       return response;
     } on DioException catch (e) {
@@ -101,7 +109,7 @@ class ItensService {
         '$baseURL/createiten/$userId',
         data: credenciais,
       );
-      log(response.toString());
+      log(response.toString(), name: 'Response');
       return response;
     } on DioException catch (e) {
       if (e.response != null) {
