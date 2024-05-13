@@ -8,6 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService {
   Dio dio = Dio();
+   static const baseURL =  String.fromEnvironment('BASE_API_URL',
+      defaultValue: 'http://localhost:8000/api');
   UserService() {
     dio.interceptors.add(InterceptorsWrapper(
       onRequest:
@@ -25,15 +27,14 @@ class UserService {
 
   cadastro(Map credenciais) async {
     return dio.post(
-      'http://192.168.15.158:8000/api/createuser',
+      '$baseURL/createuser',
       data: credenciais,
     );
   }
 
   Future login(Map credenciais, BuildContext context) async {
     try {
-      var response = await dio.post('http://192.168.15.158:8000/api/login',
-          data: credenciais);
+      var response = await dio.post('$baseURL/login', data: credenciais);
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
       await sharedPreferences.setString(
@@ -70,16 +71,12 @@ class UserService {
   }
 
   Future getUserByToken() async {
-    await dio
-        .get('http://192.168.15.158:8000/api/tokenuser')
-        .then((value) => value.data);
+    await dio.get('$baseURL/tokenuser').then((value) => value.data);
   }
 
   Future logout() async {
     try {
-      return await dio
-          .post('http://192.168.15.158:8000/api/logout')
-          .then((value) async {
+      return await dio.post('$baseURL/logout').then((value) async {
         SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
         sharedPreferences.remove('user');
@@ -100,8 +97,7 @@ class UserService {
   Future showUserById(String id) async {
     try {
       Response response;
-      response =
-          await dio.get('http://192.168.15.158:8000/api/showoneuser/$id');
+      response = await dio.get('$baseURL/showoneuser/$id');
       log(response.toString());
       return response;
     } on DioException catch (e) {
@@ -118,8 +114,7 @@ class UserService {
   Future showFuncionarios(String empresaId) async {
     try {
       Response response;
-      response = await dio
-          .get('http://192.168.15.158:8000/api/showoneempresaf/$empresaId');
+      response = await dio.get('$baseURL/showoneempresaf/$empresaId');
       log(response.toString());
       return response;
     } on DioException catch (e) {
@@ -136,8 +131,7 @@ class UserService {
   Future showFuncionario(String userId) async {
     try {
       Response response;
-      response =
-          await dio.get('http://192.168.15.158:8000/api/showoneuser/$userId');
+      response = await dio.get('$baseURL/showoneuser/$userId');
       log(response.toString());
       return response;
     } on DioException catch (e) {
@@ -154,8 +148,7 @@ class UserService {
   Future deleteUser(String userId) async {
     try {
       Response response;
-      response =
-          await dio.delete('http://192.168.15.158:8000/api/deleteuser/$userId');
+      response = await dio.delete('$baseURL/deleteuser/$userId');
       log(response.toString());
       return response;
     } on DioException catch (e) {
@@ -176,7 +169,7 @@ class UserService {
       };
       Response response;
       response = await dio.put(
-        'http://192.168.15.158:8000/api/edituser/$userId',
+        '$baseURL/edituser/$userId',
         data: credenciais,
       );
       log(response.toString());

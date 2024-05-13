@@ -24,6 +24,8 @@ class ItensService {
       },
     ));
   }
+  static const baseURL = String.fromEnvironment('BASE_API_URL',
+      defaultValue: 'http://localhost:8000/api');
 
   Future getItens(BuildContext context) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -34,7 +36,7 @@ class ItensService {
         log(userMap['empresa_id'].toString());
         Response response;
         response = await dio.get(
-            'http://192.168.15.158:8000/api/showoneempresai/${userMap['empresa_id']}');
+            '$baseURL/showoneempresai/${userMap['empresa_id']}');
         log(response.toString());
         return response;
       } else {
@@ -78,7 +80,7 @@ class ItensService {
     try {
       Response response;
       response =
-          await dio.get('http://192.168.15.158:8000/api/showoneiten/$id');
+          await dio.get('$baseURL/showoneiten/$id');
       log(response.toString());
       return response;
     } on DioException catch (e) {
@@ -96,7 +98,7 @@ class ItensService {
     try {
       Response response;
       response = await dio.post(
-        'http://192.168.15.158:8000/api/createiten/$userId',
+        '$baseURL/createiten/$userId',
         data: credenciais,
       );
       log(response.toString());
@@ -116,7 +118,7 @@ class ItensService {
     try {
       Response response;
       response = await dio.delete(
-        'http://192.168.15.158:8000/api/deleteiten/$itemId',
+        '$baseURL/deleteiten/$itemId',
       );
       log(response.toString());
       return response;
@@ -135,7 +137,7 @@ class ItensService {
     try {
       Response response;
       response = await dio.put(
-        'http://192.168.15.158:8000/api/editeiten/$itemId',
+        '$baseURL/editeiten/$itemId',
         data: credenciais,
       );
       log(response.toString());
