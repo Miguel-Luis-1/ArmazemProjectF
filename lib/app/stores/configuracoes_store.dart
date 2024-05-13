@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:armazemf/app/models/user.dart';
+import 'package:armazemf/app/service/itens_service.dart';
 import 'package:armazemf/app/service/user_service.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -46,13 +47,20 @@ abstract class ConfiguracoesStoreBase with Store {
   }
 
   @action
+  getPDF() async {
+    await ItensService().getPDF(user!.empresaId.toString());
+  }
+
+  @action
   logout() async {
     await UserService().logout();
   }
 
   @action
   deletConta() async {
-    UserService().deleteUser(user!.id.toString()).whenComplete(() => logout());
+    await UserService()
+        .deleteUser(user!.id.toString())
+        .whenComplete(() => logout());
   }
 
   @action

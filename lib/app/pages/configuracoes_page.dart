@@ -60,6 +60,27 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                       width: double.infinity,
                       child: TextButton(
                         style: const ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll(Colors.blue),
+                        ),
+                        onPressed: () {
+                          // Função trava Flutter
+                          //store.getPDF();
+                        },
+                        child: const Text(
+                          'Gerar PDF de itens',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      width: double.infinity,
+                      child: TextButton(
+                        style: const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(Colors.red),
                         ),
                         onPressed: () {

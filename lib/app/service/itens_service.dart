@@ -2,12 +2,15 @@
 
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
+
 
 import 'package:armazemf/app/widgets/un_connect_dilog.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path_provider/path_provider.dart';
 
 class ItensService {
   Dio dio = Dio();
@@ -155,6 +158,31 @@ class ItensService {
         log('1Erro: ${e.response!.data}');
       } else {
         log('2Erro: ${e.message}');
+      }
+    } catch (e) {
+      log('Erro: $e');
+    }
+  }
+
+  Future getPDF(String empresaId) async {
+    try {
+      var response = await Dio().get(
+        '$baseURL/editeiten/$empresaId',
+        options: Options(
+          responseType: ResponseType.bytes,
+        ),
+      );
+
+      final directory = await getApplicationDocumentsDirectory();
+      final file = File('${directory.path}/relatorio_de_itens.pdf');
+      await file.writeAsBytes(response.data);
+
+      log('Arquivo salvo em ${directory.path}');
+    } on DioException catch (e) {
+      if (e.response != null) {
+        log('Erro: ${e.response!.data}');
+      } else {
+        log('Erro: ${e.message}');
       }
     } catch (e) {
       log('Erro: $e');
