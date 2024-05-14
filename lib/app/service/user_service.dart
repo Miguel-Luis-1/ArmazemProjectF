@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService {
   Dio dio = Dio();
-   static const baseURL =  String.fromEnvironment('BASE_API_URL',
+  static const baseURL = String.fromEnvironment('BASE_API_URL',
       defaultValue: 'http://localhost:8000/api');
   UserService() {
     dio.interceptors.add(InterceptorsWrapper(
@@ -162,7 +162,7 @@ class UserService {
     }
   }
 
-  Future promoverFuncionario(String userId) async {
+  Future promoverFuncionario(BuildContext context, String userId) async {
     try {
       Map credenciais = {
         'is_gerente': true,
@@ -176,7 +176,8 @@ class UserService {
       return response;
     } on DioException catch (e) {
       if (e.response != null) {
-        log('1Erro: ${e.response!.data}');
+        log('1Erro: ${e.response!.data['Erro']}');
+
       } else {
         log('2Erro: ${e.message}');
       }

@@ -89,7 +89,7 @@ abstract class FuncionariosPageStoreBase with Store {
   @action
   promover(String userId, BuildContext context) async {
     await UserService()
-        .promoverFuncionario(userId)
+        .promoverFuncionario(context, userId)
         .whenComplete(() => getFuncionarios(context));
   }
 
