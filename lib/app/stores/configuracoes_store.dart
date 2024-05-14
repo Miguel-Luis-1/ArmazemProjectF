@@ -1,10 +1,18 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:armazemf/app/models/user.dart';
 import 'package:armazemf/app/service/itens_service.dart';
 import 'package:armazemf/app/service/user_service.dart';
+import 'package:armazemf/app/widgets/base_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:mobx/mobx.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'configuracoes_store.g.dart';
@@ -48,7 +56,34 @@ abstract class ConfiguracoesStoreBase with Store {
 
   @action
   getPDF() async {
-    await ItensService().getPDF(user!.empresaId.toString());
+    await ItensService().getPDF(user!.empresaId.toString()).then((value) async {
+      var bytes = base64Decode(value.data);
+      final output = await getTemporaryDirectory();
+      final file = File("${output.path}/relatorio.pdf");
+      await file.writeAsBytes(bytes.buffer.asUint8List());
+      // log(value.toString(), name: 'Value');
+      // log(bytes.toString(), name: 'Bytes');
+      Modular.to.push(MaterialPageRoute(builder: (context) {
+        return Hero(
+          tag: 'feedbackPDF',
+          child: Observer(builder: (context) {
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Relatório de itens'),
+                actions: [
+                  IconButton(
+                      onPressed: () => Share.shareXFiles([XFile(file.path)]),
+                      icon: const Icon(Icons.share)),
+                ],
+              ),
+              body: PDFView(
+                pdfData: bytes.buffer.asUint8List(),
+              ),
+            );
+          }),
+        );
+      }));
+    });
   }
 
   @action

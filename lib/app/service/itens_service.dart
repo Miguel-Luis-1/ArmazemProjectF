@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-
 import 'package:armazemf/app/widgets/un_connect_dilog.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -166,18 +165,10 @@ class ItensService {
 
   Future getPDF(String empresaId) async {
     try {
-      var response = await Dio().get(
-        '$baseURL/editeiten/$empresaId',
-        options: Options(
-          responseType: ResponseType.bytes,
-        ),
+      Response response = await Dio().get(
+        '$baseURL/pdf/$empresaId',
       );
-
-      final directory = await getApplicationDocumentsDirectory();
-      final file = File('${directory.path}/relatorio_de_itens.pdf');
-      await file.writeAsBytes(response.data);
-
-      log('Arquivo salvo em ${directory.path}');
+      return response;
     } on DioException catch (e) {
       if (e.response != null) {
         log('Erro: ${e.response!.data}');

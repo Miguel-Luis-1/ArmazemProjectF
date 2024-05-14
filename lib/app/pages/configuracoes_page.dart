@@ -64,8 +64,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                               MaterialStatePropertyAll(Colors.blue),
                         ),
                         onPressed: () {
-                          // Função trava Flutter
-                          //store.getPDF();
+                          store.getPDF();
                         },
                         child: const Text(
                           'Gerar PDF de itens',

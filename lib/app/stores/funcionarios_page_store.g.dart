@@ -119,6 +119,14 @@ mixin _$FuncionariosPageStore on FuncionariosPageStoreBase, Store {
     return _$deleteAsyncAction.run(() => super.delete(userId, context));
   }
 
+  late final _$promoverAsyncAction =
+      AsyncAction('FuncionariosPageStoreBase.promover', context: context);
+
+  @override
+  Future promover(String userId, BuildContext context) {
+    return _$promoverAsyncAction.run(() => super.promover(userId, context));
+  }
+
   late final _$FuncionariosPageStoreBaseActionController =
       ActionController(name: 'FuncionariosPageStoreBase', context: context);
 

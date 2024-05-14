@@ -33,12 +33,28 @@ mixin _$ConfiguracoesStore on ConfiguracoesStoreBase, Store {
     return _$getUserAsyncAction.run(() => super.getUser());
   }
 
+  late final _$getPDFAsyncAction =
+      AsyncAction('ConfiguracoesStoreBase.getPDF', context: context);
+
+  @override
+  Future getPDF() {
+    return _$getPDFAsyncAction.run(() => super.getPDF());
+  }
+
   late final _$logoutAsyncAction =
       AsyncAction('ConfiguracoesStoreBase.logout', context: context);
 
   @override
   Future logout() {
     return _$logoutAsyncAction.run(() => super.logout());
+  }
+
+  late final _$deletContaAsyncAction =
+      AsyncAction('ConfiguracoesStoreBase.deletConta', context: context);
+
+  @override
+  Future deletConta() {
+    return _$deletContaAsyncAction.run(() => super.deletConta());
   }
 
   late final _$ConfiguracoesStoreBaseActionController =
