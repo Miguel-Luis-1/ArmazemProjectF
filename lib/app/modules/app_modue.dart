@@ -5,6 +5,7 @@ import 'package:armazemf/app/pages/cadastro_page.dart';
 import 'package:armazemf/app/pages/configuracoes_page.dart';
 import 'package:armazemf/app/pages/create_edit_page.dart';
 import 'package:armazemf/app/pages/funcionarios_page.dart';
+import 'package:armazemf/app/pages/graficos_page.dart';
 import 'package:armazemf/app/pages/login_page.dart';
 import 'package:armazemf/app/pages/show_item_page.dart';
 import 'package:armazemf/app/stores/back_dialog_store.dart';
@@ -13,6 +14,7 @@ import 'package:armazemf/app/stores/cadastro_page_store.dart';
 import 'package:armazemf/app/stores/configuracoes_store.dart';
 import 'package:armazemf/app/stores/create_edit_page_store.dart';
 import 'package:armazemf/app/stores/funcionarios_page_store.dart';
+import 'package:armazemf/app/stores/graficos_page_store.dart';
 import 'package:armazemf/app/stores/home_page_store.dart';
 import 'package:armazemf/app/stores/login_page_store.dart';
 import 'package:armazemf/app/stores/show_item_page_store.dart';
@@ -30,6 +32,7 @@ class AppModule extends Module {
     Bind.singleton((i) => ShowItemPageStore()),
     Bind.singleton((i) => FuncionariosPageStore()),
     Bind.singleton((i) => BasePageStore()),
+    Bind.singleton((i) => GraficosPageStore()),
   ];
 
   @override
@@ -46,13 +49,14 @@ class AppModule extends Module {
     }),
     ChildRoute('/createuser', child: (_, args) => const CadastroPage()),
     ChildRoute('/login', child: (_, args) => const LoginPage()),
-       ChildRoute('/show/item/:id', child: (_, args) {
+    ChildRoute('/show/item/:id', child: (_, args) {
       log(args.params.toString(), name: 'Id');
       return ShowItemPage(
         id: args.params['id'].toString(),
       );
     }),
-    ChildRoute('/funcionarios', child: (context, args) => const FuncionariosPage()),
-
+    ChildRoute('/funcionarios',
+        child: (context, args) => const FuncionariosPage()),
+    ChildRoute('/graficos', child: (context, args) => const GraficosPage()),
   ];
 }

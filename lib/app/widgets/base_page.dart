@@ -107,6 +107,25 @@ class _BasePageState extends State<BasePage> {
                         children: [
                           const Divider(),
                           ListTile(
+                            title: const Text('Gráficos'),
+                            leading: const Icon(Icons.data_saver_off_rounded),
+                            onTap: () {
+                              if (Modular.to.path == '/graficos') {
+                                Navigator.pop(context);
+                              } else {
+                                Modular.to.pushNamed('/graficos');
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    Visibility(
+                      visible: store.isGerente,
+                      child: Column(
+                        children: [
+                          const Divider(),
+                          ListTile(
                             title: const Text('Funcionários'),
                             leading: const Icon(Icons.group),
                             onTap: () {
