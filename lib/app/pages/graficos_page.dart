@@ -33,40 +33,45 @@ class _GraficosPageState extends State<GraficosPage> {
             ? const Center(child: Text('Carregando...'))
             : Column(
                 children: [
-                  buildDefaultPieChart(),
+                  store.itens.isEmpty
+                      ? const Center(
+                          child: Text('Não há itens para carregar o grafico'))
+                      : _buildDefaultColumnChart(),
                 ],
               ),
       );
     });
   }
 
-  SfCircularChart buildDefaultPieChart() {
-    return SfCircularChart(
-      title: ChartTitle(text: 'Gráfico de itens'),
-      legend: Legend(),
-      series: _getDefaultPieSeries(),
+  SfCartesianChart _buildDefaultColumnChart() {
+    return SfCartesianChart(
+      plotAreaBorderWidth: 0,
+      title: ChartTitle(text: 'Itens cadastrados'),
+      primaryXAxis: CategoryAxis(
+        majorGridLines: const MajorGridLines(width: 0),
+      ),
+      primaryYAxis: NumericAxis(
+          axisLine: const AxisLine(width: 0),
+          labelFormat: '{value} Unidades',
+          majorTickLines: const MajorTickLines(size: 0)),
+      series: _getDefaultColumnSeries(),
     );
   }
 
-  List<PieSeries> _getDefaultPieSeries() {
+  List<ColumnSeries> _getDefaultColumnSeries() {
     return [
-      PieSeries(
-          explode: true,
-          explodeIndex: 0,
-          dataSource: store.itens
-              .map((element) => {
-                    'x': element['nome'].toString(),
-                    'y': int.parse(element['qtdunitaria'].toString()),
-                    'text':
-                        '${element['nome'].toString()}\n${element['qtdunitaria']}',
-                  })
-              .toList(),
-          xValueMapper: (dynamic data, _) => data['x'] as String,
-          yValueMapper: (dynamic data, _) => data['y'],
-          dataLabelMapper: (dynamic data, _) => data['text'],
-          startAngle: 80,
-          endAngle: 80,
-          dataLabelSettings: const DataLabelSettings(isVisible: true)),
+      ColumnSeries(
+        dataSource: store.itens
+            .map((element) => {
+                  'x': element['nome'],
+                  'y': element['qtdunitaria'],
+                })
+            .toList(),
+        xValueMapper: (dynamic data, _) => data['x'] as String,
+        yValueMapper: (dynamic data, _) => data['y'],
+        dataLabelSettings: const DataLabelSettings(
+            isVisible: true, textStyle: TextStyle(fontSize: 10)),
+      )
     ];
   }
 }
