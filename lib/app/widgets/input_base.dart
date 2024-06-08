@@ -1,10 +1,13 @@
+import 'package:armazemf/app/models/currency_PtBr_Input_Formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class InputBase extends StatelessWidget {
   final String title;
   final String alert;
   final TextEditingController textController;
   final bool isNuber;
+  final bool isMoney;
   final bool isPassword;
 
   const InputBase({
@@ -14,6 +17,7 @@ class InputBase extends StatelessWidget {
     required this.textController,
     this.isNuber = false,
     this.isPassword = false,
+    this.isMoney = false,
   });
 
   @override
@@ -22,7 +26,11 @@ class InputBase extends StatelessWidget {
       if (isNuber) {
         return const TextInputType.numberWithOptions(decimal: true);
       } else {
-        return TextInputType.text;
+        if (isMoney) {
+          return  TextInputType.number;
+        } else {
+          return TextInputType.text;
+        }
       }
     }
 
@@ -48,6 +56,10 @@ class InputBase extends StatelessWidget {
             border: InputBorder.none,
           ),
           keyboardType: getTipe(isNuber),
+          inputFormatters: isMoney ?  [
+                FilteringTextInputFormatter.digitsOnly,
+                CurrencyPtBrInputFormatter()
+              ] : null,
           validator: (value) {
             if (value!.isEmpty) {
               return alert;

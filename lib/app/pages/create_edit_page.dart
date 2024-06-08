@@ -79,7 +79,7 @@ class _CreateEditPageState extends State<CreateEditPage> {
                     title: 'Preço do Produto',
                     alert: 'Escreva o Preço',
                     textController: store.precoController,
-                    isNuber: true,
+                    isMoney: true,                   
                   ),
                   InputBase(
                     title: 'Quantidade de unidades do Produto',

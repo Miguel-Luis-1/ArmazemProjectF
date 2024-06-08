@@ -45,6 +45,13 @@ abstract class CreateEditPageStoreBase with Store {
   }
 
   @action
+  ajustePreco(String text) {
+    text = text.replaceAll(new RegExp(r'R\$ '), '');
+    text = text.replaceAll(',', '.');
+    return text;
+  }
+
+  @action
   getIten(String? id) async {
     if (id != '') {
       log(id!);
@@ -87,7 +94,7 @@ abstract class CreateEditPageStoreBase with Store {
       'nome': nomeController.text,
       'categoria': categoriaController.text,
       'descricao': descricaoController.text,
-      'preco': double.tryParse(precoController.text),
+      'preco': ajustePreco(precoController.text),
       'qtdunitaria': qtdunitariaController.text,
     };
     log(data.toString());
@@ -126,7 +133,7 @@ abstract class CreateEditPageStoreBase with Store {
       'nome': nomeController.text,
       'categoria': categoriaController.text,
       'descricao': descricaoController.text,
-      'preco': double.tryParse(precoController.text),
+      'preco': ajustePreco(precoController.text),
       'qtdunitaria': qtdunitariaController.text,
     };
     SharedPreferences sharedPreferences;

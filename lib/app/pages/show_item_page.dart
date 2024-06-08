@@ -64,7 +64,7 @@ class _ShowItemPageState extends State<ShowItemPage> {
                             title: 'Qual há ação desejada?',
                             content: Padding(
                               padding: const EdgeInsets.fromLTRB(
-                                50,
+                                45,
                                 0,
                                 0,
                                 0,
