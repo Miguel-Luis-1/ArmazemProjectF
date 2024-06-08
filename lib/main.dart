@@ -22,7 +22,9 @@ class AppWidget extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Armazem Project',
-      theme: ThemeData.light(),
+       theme: ThemeData(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       routerDelegate: Modular.routerDelegate,
       routeInformationParser: Modular.routeInformationParser,
       builder: Asuka.builder,
