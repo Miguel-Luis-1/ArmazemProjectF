@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 
 part 'create_edit_page_store.g.dart';
 
@@ -47,8 +48,9 @@ abstract class CreateEditPageStoreBase with Store {
   @action
   ajustePreco(String text) {
     text = text.replaceAll(new RegExp(r'R\$ '), '');
-    text = text.replaceAll(',', '.');
-    return text;
+    final format = NumberFormat.decimalPattern('pt_BR');
+    final number = format.parse(text);
+    return number.toString();
   }
 
   @action
